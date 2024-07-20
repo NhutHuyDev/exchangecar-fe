@@ -1,0 +1,10 @@
+@media only screen and (max-width: 575.98px) {
+  .contact-icon {
+    bottom: 9px !important;
+    right: 12px !important;
+  }
+
+  .back-to-top {
+    right: 12px !important;
+  }
+}

@@ -1,0 +1,78 @@
+.filter-btn:hover {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.MuiButtonBase-root.choice {
+    background-color:  var(--primary-color);
+    color: white;
+}
+
+.MuiButtonBase-root.choice:hover {
+    background-color:  var(--primary-color) !important;
+    color: white !important;
+}
+
+.item-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.item-filter img {
+    height: 28px;
+}
+
+.item-filter p {
+    margin: 0;
+}
+
+.item-filter.filtering {
+    background-color: #bde0ff;
+    border-radius: 5px;
+    border-radius: 5px;
+}
+
+.item-filter.active {
+    background-color: #e2e4e6;
+}
+
+
+.item-sub {
+    border-radius: 5px;
+}
+
+.item-sub.active {
+    padding: 10px;
+    background-color: #e2e4e6;
+}
+
+.item-sub-filter {
+    padding: 5px 10px !important;
+    border-radius: 5px;
+    margin: 5px 10px;
+    background-color: #fff;
+    color: #000000;
+    min-width: 40%;
+    width: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.item-sub-filter .col-4 {
+    padding: 0 5px !important;
+}
+
+.item-sub-filter.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+
+
+

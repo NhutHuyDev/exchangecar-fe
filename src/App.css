@@ -1,0 +1,201 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f97316;
+  --second-color: #173559;
+  --grey-color: #c5c5c5;
+
+  --height-navbar: 64px;
+} 
+
+* {
+  border-color: var(--second-color) !important;
+  outline: var(--second-color) !important; 
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--second-color); 
+  text-decoration: none;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.section-title-underline {
+  @apply w-[100px] h-[3px] rounded-full block mx-auto my-3;
+}
+
+#car-detail-wrapper .text-primary {
+  color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  outline: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+#car-detail-wrapper .btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+#car-detail-wrapper .btn-outline-primary:hover {
+  color: #fff !important;
+  background-color: var(--primary-color);
+}
+
+.section {
+  padding: 40px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.background-primary-linear {
+  background: linear-gradient(0deg, rgba(188,89,20,1) 0%, rgba(249,115,22,1) 100%);
+}
+
+/* title highlight */
+.title-hightlight {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.title-hightlight span {
+  position: relative;
+  color: var(--second-color);
+}
+
+.title-hightlight span::after {
+  content: "";
+  position: absolute;
+  top: 95%;
+  width: 150%;
+  aspect-ratio: 3 / 1;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 50%;
+  border: 0.1em solid var(--second-color);
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+}
+
+.title-hightlight.second  {
+  color: white;
+}
+
+.title-hightlight.second span {
+  color: var(--primary-color);
+}
+
+.title-hightlight.second span::after {
+  border: 0.1em solid var(--primary-color);
+}
+
+
+.show-on-desktop {
+  display: block !important;
+}
+
+.show-on-mobile {
+  display: none !important;
+}
+
+/* Car Detail */
+#car-detail-wrapper {
+  font-family: "Quicksand", sans-serif;
+  /* margin-top: var(--height-navbar); */
+}
+
+#car-detail-wrapper .option-title,
+#car-detail-wrapper .overview-title,
+#car-detail-wrapper .pricing-title,
+#car-detail-wrapper .certified-title,
+#car-detail-wrapper .relevant-cars-title,
+.font-size-heading {
+  font-size: 28px !important;
+}
+
+
+@media only screen and (max-width: 1199.98px) {
+  .SellCarConfirm .container {
+    padding: 6rem 0 0 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .SellCarConfirm .container .row {
+    flex-direction: column-reverse;
+    margin: 0 0 2rem 0 !important;
+    padding: 0 1rem !important;
+  }
+
+  .SellCarConfirm .container .row>div:first-child>div {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  .SellCarConfirm .container .row>div:last-child>div {
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  .SellCarConfirm .container .SellCarConfirm-image-bottom {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .show-on-mobile {
+    display: block !important;
+  }
+
+  .show-on-desktop {
+    display: none !important;
+  }
+
+  .CarValuation .container .row>div:last-child {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  .CarValuation .container .row>div:first-child {
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  .back-sell-car {
+    position: unset !important;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .steppers {
+    flex-direction: column !important;
+    align-items: start !important;
+  }
+
+  .steppers>div {
+    margin-bottom: 20px !important;
+  }
+
+  .CarValuation .car_valuation_nothing img {
+    width: 100% !important;
+  }
+}

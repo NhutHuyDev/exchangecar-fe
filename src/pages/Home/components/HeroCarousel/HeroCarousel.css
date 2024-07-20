@@ -1,0 +1,33 @@
+#hero-carousel .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {
+  display: flex;
+  justify-content: left;
+  position: absolute;
+  left: 4%;
+  bottom: 17%;
+}
+
+#hero-carousel .swiper-pagination-bullet {
+  width: 5px;
+  height: 5px;
+}
+
+#hero-carousel .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 15px;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #f97316;
+}
+
+/* --- RESPONSIVE ---  */
+
+@media only screen and (min-width: 640px) {
+  #hero-carousel .swiper-pagination-bullet {
+    width: 9px;
+    height: 9px;
+  }
+
+  #hero-carousel .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    width: 29px;
+    height: 9px;
+  }
+}

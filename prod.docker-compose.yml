@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  citicar_frontend:
+    restart: always
+    container_name: citicar_frontend
+    image: citicar_frontend:prod
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    volumes:
+      - ./:/usr/src/react-app
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - VIRTUAL_HOST=beta.citicar.vn
+      - LETSENCRYPT_HOST=beta.citicar.vn
+      - VIRTUAL_PORT=8080
+      - NODE_ENV=production
+    ports:
+      - "8080:8080"
+    networks:
+      nginx-proxy:
+
+networks:
+  citicar:
+    external: true
+  nginx-proxy:
+    external: true

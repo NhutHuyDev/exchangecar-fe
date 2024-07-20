@@ -1,0 +1,37 @@
+/* Car Image Slide  */
+.images-swiper-inner.swiper {
+  height: 100%;
+}
+
+.images-swiper-inner.swiper .swiper-button-prev,
+.images-swiper-inner.swiper .swiper-button-next {
+  z-index: 99;
+  width: 30px;
+  top: 50%;
+  height: 30px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  margin: 0 15px;
+}
+
+.images-swiper-inner.swiper .swiper-button-prev {
+  left: 0;
+}
+
+.images-swiper-inner.swiper .swiper-button-next {
+  right: 0;
+}
+
+.images-swiper-inner.swiper .swiper-button-prev::after,
+.images-swiper-inner.swiper .swiper-button-next::after {
+  font-size: 12px;
+  font-weight: bold;
+}
+.images-swiper-inner.swiper .swiper-pagination-fraction {
+  color: #fff;
+}
+
+.images-swiper-inner.swiper .swiper-pagination-fraction span {
+  padding-right: 0;
+}

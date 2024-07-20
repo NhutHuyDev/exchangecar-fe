@@ -1,0 +1,11 @@
+.custom-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active,
+.custom1-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  @apply !bg-[white] text-primary-color relative;
+}
+
+.custom-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active::after,
+.custom1-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active::after {
+  @apply absolute content-[""] bottom-0 left-0 right-0 h-[3px] rounded-full bg-primary-color transition-all;
+}
