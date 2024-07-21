@@ -171,10 +171,11 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
                 onClick={handleClick}
                 sx={{
                     fontSize: { xs: '10px', sm: '13px', minWidth: '135px' },
-                    color: '#173559',
-                    border: '1px solid #173559',
+                    fontWeight: 'bold',
+                    color: '#f97316',
+                    border: '1px solid #f97316 !important',
                 }}>
-                Hãng xe
+                Car Brand
             </Button>
             <Popover
                 id={id}
@@ -187,13 +188,7 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
                 }}
 
             >
-                <Typography
-                    variant='h6'
-                    textAlign={'center'}
-                    color={'#999'}
-                    sx={{ padding: '10px 10px 0 10px', fontSize: '18px' }}>
-                    Hãng xe
-                </Typography>
+               
                 <Box
                     sx={boxStyle}>
 

@@ -5,9 +5,10 @@ const carsSlice = createSlice({
   name: "cars",
   initialState: {
     status: "idle",
+    queryTable: {},
     cars: [],
-    latestPost: [],
-    currentCar: {},
+    latestPosts: [],
+    currentPost: {},
     relevantCars: [],
     totalPage: 0,
   },
@@ -30,20 +31,27 @@ const carsSlice = createSlice({
       })
       .addCase(getLatestPosts.fulfilled, (state, action) => {
         if (!action.payload.error) {
-          state.latestPost = action.payload.data;
+          state.latestPosts = action.payload.latestPosts;
         } else {
-          state.latestPost = [];
+          state.latestPosts = [];
         }
         state.status = "idle";
       })
       .addCase(getCar.fulfilled, (state, action) => {
-        state.currentCar = action.payload;
+        state.currentPost = action.payload;
       })
       .addCase(getRelevantCars.pending, (state, action) => {
         state.status = "loading";
       })
       .addCase(getRelevantCars.fulfilled, (state, action) => {
-        state.relevantCars = action.payload;
+        state.relevantCars = action.payload.relevantPosts;
+        state.status = "idle";
+      })
+      .addCase(getQueryTable.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getQueryTable.fulfilled, (state, action) => {
+        state.queryTable = action.payload.query_table;
         state.status = "idle";
       });
   },
@@ -76,7 +84,7 @@ export const getCars = createAsyncThunk(
 );
 
 export const getCar = createAsyncThunk("/car/getCar", async (slug) => {
-  const res = await fetchAPI("/api/core/car/" + slug);
+  const res = await fetchAPI("/api/v1/posts/" + slug);
 
   const { data } = res.data;
 
@@ -84,13 +92,11 @@ export const getCar = createAsyncThunk("/car/getCar", async (slug) => {
 });
 
 export const getLatestPosts = createAsyncThunk(
-  "/cars/latest",
+  "/cars/getLatestPosts",
   async () => {
     const res = await fetchAPI("/api/v1/posts/latest");
 
     const { data } = res.data;
-
-    console.log(data)
 
     return data;
   }
@@ -99,11 +105,20 @@ export const getLatestPosts = createAsyncThunk(
 export const getRelevantCars = createAsyncThunk(
   "/cars/getRelevantCars",
   async (brandName) => {
-    const res = await fetchAPI("/api/core/cars/?car_brand=" + brandName);
+    const res = await fetchAPI("/api/v1/posts/relevant?car_brand=" + brandName);
 
     const { data } = res.data;
 
-    // console.log(data);
+    return data;
+  }
+);
+
+export const getQueryTable = createAsyncThunk(
+  "/cars/getQueryTable",
+  async (brandName) => {
+    const res = await fetchAPI("/api/v1/posts/query-table");
+
+    const { data } = res.data;
 
     return data;
   }

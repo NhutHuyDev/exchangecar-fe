@@ -8,21 +8,14 @@ import VNDFormatToWord from "utils/VNDFormatToWord";
 import constaints from "constaints";
 
 import "./Detail.css";
+import { formatPhoneNumber } from "utils/fomatPhoneNumber";
 
-function Detail({ image, car }) {
+function Detail({ image, currentPost }) {
   const BASE_URL = constaints.host;
   const [activeThumb, setActiveThumb] = useState(null);
-  const [bookmark, setBookMark] = useState(false);
-  const [compare, setCompare] = useState(false);
-  const { billionPart, millionPart } = VNDFormatToWord(car.price);
+  const { billionPart, millionPart } = VNDFormatToWord(currentPost.car.selling_price);
 
-  const toggleBookMark = () => {
-    setBookMark(!bookmark);
-  };
-
-  const toggleCompare = () => {
-    setCompare(!compare);
-  };
+  console.log(billionPart, millionPart, currentPost.car.selling_price)
 
   useEffect(() => {
     console.log(activeThumb);
@@ -48,11 +41,11 @@ function Detail({ image, car }) {
               >
                 {image
                   ? image.map((item, index) => (
-                      <SwiperSlide key={"big-image" + item + index}>
+                      <SwiperSlide key={"big-image" + item.gallery_url+ index}>
                         <div
                           className="detail-big-image"
                           style={{
-                            backgroundImage: `url(${BASE_URL + item})`,
+                            backgroundImage: `url(${item.gallery_url})`,
                             backgroundRepeat: "no-repeat",
                             width: "100%",
                             height: "420px",
@@ -83,11 +76,11 @@ function Detail({ image, car }) {
               >
                 {image
                   ? image.map((item, index) => (
-                      <SwiperSlide key={"small-image" + item + index}>
+                      <SwiperSlide key={"small-image" + item.gallery_url + index}>
                         <div
-                          className="thumb-image rounded-2xl"
+                          className="thumb-image rounded-2xl cursor-pointer"
                           style={{
-                            backgroundImage: `url(${BASE_URL + item})`,
+                            backgroundImage: `url(${item.gallery_url})`,
                             backgroundRepeat: "no-repeat",
                             width: "100%",
                             height: "90px",
@@ -110,7 +103,7 @@ function Detail({ image, car }) {
                 </div>
                 <div className="mt-2">
                   <h1 className="font-extrabold text-2xl text-primary-color">
-                    {car.name}
+                    {currentPost?.car?.car_name}
                   </h1>
                 </div>
                 <div className="flex items-center gap-4 mt-3">
@@ -151,7 +144,7 @@ function Detail({ image, car }) {
                         alt=""
                       />
                       <span className="text-base text-primary-color font-semibold">
-                        {car.odo}
+                        {currentPost?.car?.car_mileage}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -161,7 +154,7 @@ function Detail({ image, car }) {
                         alt=""
                       />
                       <span className="text-base text-primary-color font-semibold">
-                        {car.year_of_manufacture}
+                        {currentPost?.car?.manufacturing_date}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -171,7 +164,7 @@ function Detail({ image, car }) {
                         alt=""
                       />
                       <span className="text-base text-primary-color font-semibold">
-                        {car.car_status}
+                        {currentPost?.car?.car_status}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -181,7 +174,7 @@ function Detail({ image, car }) {
                         alt=""
                       />
                       <span className="text-base text-primary-color font-semibold">
-                        {car.origin}
+                        {currentPost?.car?.city}
                       </span>
                     </div>
                     {/* <div className='flex items-center gap-2'>
@@ -206,7 +199,7 @@ function Detail({ image, car }) {
                       className="col-span-1 w-12 mx-auto"
                     />
                     <div className="col-span-2 text-secondary-color">
-                        <p className="font-bold">Nguyễn Văn A</p>
+                        <p className="font-bold">{currentPost?.customer?.first_name + currentPost?.customer?.last_name}</p>
                         <span>District 7, Ho Chi Minh City</span>
                     </div>
                   </div>
@@ -216,7 +209,7 @@ function Detail({ image, car }) {
                   className="text-center block py-3 rounded-full w-full bg-primary-color text-grey-color text-lg font-bold"
                 >
                   <FontAwesomeIcon icon={faPhone} className="me-2" />
-                  0917 174 050
+                  {formatPhoneNumber(currentPost?.customer?.mobile_phone)}
                 </a>
               </div>
             </div>

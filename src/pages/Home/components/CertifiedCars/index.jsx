@@ -17,10 +17,12 @@ function CertifiedCars() {
 
     useEffect(() => {
         dispatch(getLatestPosts())
-    }, [])
+    }, [dispatch])
 
     const statusCars = useSelector(statusCarsSelector)
     const latestPosts = useSelector(latestPostsSelector)
+
+    console.log(latestPosts)
 
     return (
         <div className="bg-grey-color py-12">
@@ -67,7 +69,7 @@ function CertifiedCars() {
                 <div className="mt-10">
                     <CarSwiper
                         statusCars={statusCars}
-                        cars={latestPosts}
+                        posts={latestPosts}
                     />
 
                 </div>

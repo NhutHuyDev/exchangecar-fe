@@ -15,7 +15,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function CarSwiper({ statusCars, cars }) {
+function CarSwiper({ statusCars, posts }) {
   const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {
@@ -49,12 +49,12 @@ function CarSwiper({ statusCars, cars }) {
           },
         }}
       >
-        {statusCars === "idle" && cars?.length != 0 ? (
+        {statusCars === "idle" && posts.length !== 0 ? (
           <>
-            {cars?.map((car, index) => (
+            {posts.map((post, index) => (
               <SwiperSlide className="py-3" key={"car-swipper-" + index}>
-                <Link to={`/${car.slug}`}>
-                  <CarCard carData={car} />
+                <Link to={`/${post.car.car_slug}`}>
+                  <CarCard postData={post} />
                 </Link>
               </SwiperSlide>
             ))}

@@ -52,7 +52,7 @@ function App() {
         <Route path="/login" element={<Auth page="login" />} />
         <Route path="/create-account" element={<Auth page="create-account" />} />
         <Route path="/otp" element={<Auth page="otp" />} />
-        <Route path="/mua-xe" element={<BuyCars />} />
+        <Route path="/buy-car" element={<BuyCars />} />
         <Route path="/ban-xe" element={<CarSell />} />
         <Route path="/dinh-gia" element={<CarSell />} />
         <Route path="/thu-cu-doi-moi" element={<CarSell />} />

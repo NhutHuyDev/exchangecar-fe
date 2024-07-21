@@ -10,6 +10,8 @@ import {
   faEarthAsia,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { queryTableSelector } from "redux/selectors";
 
 function MainNavbar() {
   const [showPopover, setShowPopover] = useState([]);
@@ -51,6 +53,8 @@ function MainNavbar() {
       body.classList.remove("overflow-hidden");
     }
   }, [showMobileNavbar]);
+
+  const { car_brand } = useSelector(queryTableSelector);
 
   return (
     <>
@@ -129,33 +133,16 @@ function MainNavbar() {
                 } left-0 top-9`}
               >
                 <div className="grid grid-cols-2 bg-[white] w-80  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] p-2 font-bold">
-                  <Link to="#" className="p-1 mb-2 col-span-2">
+                  <Link to="/buy-car" className={`p-1 col-span-2 ${car_brand ? 'mb-2' : ''}`}>
                     Tất cả xe
                   </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Toyota
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Honda
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Nissan
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Mercedes
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Mitsubishi
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Ford
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Kia
-                  </Link>
-                  <Link to="#" className="p-1 mb-2">
-                    Mazda
-                  </Link>
+                  {car_brand
+                    ? Object.keys(car_brand.options).map((option) => (
+                        <Link to={`/buy-car/?car_brand=${option}`} className="p-1 mb-2">
+                          {car_brand.options[option].value}
+                        </Link>
+                      ))
+                    : ""}
                 </div>
               </div>
             </div>
@@ -271,14 +258,17 @@ function MainNavbar() {
               href="tel:02836367951"
               className="p-2 pl-0  flex items-center justify-start"
             >
-              <FontAwesomeIcon icon={faPhone} className="text-secondary-color" />
+              <FontAwesomeIcon
+                icon={faPhone}
+                className="text-secondary-color"
+              />
               <span className="ms-1">098 6578 655</span>
             </a>
             <Link
               to="/login"
               className="p-2 pl-0  flex items-center justify-start"
             >
-              <img className="h-4 w-auto mr-1" src="/svg/user.svg" alt=""/>
+              <img className="h-4 w-auto mr-1" src="/svg/user.svg" alt="" />
               <span>Sign In / Sign Up</span>
             </Link>
           </div>

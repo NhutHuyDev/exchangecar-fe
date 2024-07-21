@@ -2,11 +2,12 @@
 // Car Selectors
 export const statusCarsSelector = (state) => state.cars.status;
 export const allCarsSelector = (state) => state.cars.cars;
-export const latestPostsSelector = (state) => state.cars.latestPost;
+export const latestPostsSelector = (state) => state.cars.latestPosts;
 export const carTotalPageSelector = (state) => state.cars.totalPage;
 export const carCurrentPageSelector = (state) => state.cars.currentPage;
-export const currentCarSelector = (state) => state.cars.currentCar;
+export const currentPostSelector = (state) => state.cars.currentPost;
 export const relevantCarsSelector = (state) => state.cars.relevantCars;
+export const queryTableSelector = (state) => state.cars.queryTable;
 
 // Filters
 export const byBrandModelFilterSelector = (state) => state.filters.byBrandModel;
