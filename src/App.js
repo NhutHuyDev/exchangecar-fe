@@ -11,8 +11,8 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import AnonymousRoute from "components/Routing/AnonymousRoute";
 import CarSell from "./pages/CarSell";
-
-import { useEffect } from "react";
+import { useEffect } from 'react'
+import { getQueryTable } from 'redux/reducers/carsSlice'
 import { currentUserSelector, isAuthenticatedSelector } from "redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import authSlice from "redux/reducers/authSlice";
@@ -42,6 +42,10 @@ function App() {
     localStorage.setItem("currentUser", JSON.stringify(currentUser))
   }, [isAuthenticated, currentUser])
 
+  useEffect(() => {
+    dispatch(getQueryTable())
+  }, [dispatch])
+
   return (
     <div className="App">
       <Routes>
@@ -56,7 +60,7 @@ function App() {
         <Route path="/ban-xe" element={<CarSell />} />
         <Route path="/dinh-gia" element={<CarSell />} />
         <Route path="/thu-cu-doi-moi" element={<CarSell />} />
-        <Route path="/:slug" element={<CarDetail />} />
+        {/* <Route path="/:slug" element={<CarDetail />} /> */}
 
         <Route path="/uoc-luong-gia" element={<FormResult type={1} />} />
         <Route path="/ban-xe/thong-tin" element={<FormResult type={2} />} />
