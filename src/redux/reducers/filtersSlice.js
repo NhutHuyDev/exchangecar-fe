@@ -10,7 +10,7 @@ export default createSlice({
     byCity: null,
     byPrice: [],
     byStatus: null,
-    orderBy: '-posted_at',
+    orderBy: null,
 
     byBodyType: [],
     byKm: [],
@@ -246,7 +246,7 @@ export default createSlice({
       state.byPrice = [];
       state.byStatus = null;
       state.byKm = [];
-      state.orderBy = "-posted_at";
+      state.orderBy = null;
 
       state.byBodyType = [];
       state.byTransmission = [];
@@ -283,7 +283,7 @@ export default createSlice({
           break;
 
         case "orderBy":
-          state.orderBy = "-posted_at";
+          state.orderBy = null;
           break;
 
         case "byBodyType":

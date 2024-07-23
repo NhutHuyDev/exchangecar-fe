@@ -31,6 +31,9 @@ import numberToLocaleString from "utils/numberToLocaleString";
 import VNDFormatToWord2 from "utils/VNDFormatToWord2";
 import filtersSlice from "redux/reducers/filtersSlice";
 import OrderByContent from "./FilterContent/OrderByContent";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function Filters() {
   const dispatch = useDispatch();
@@ -58,6 +61,11 @@ function Filters() {
   const handleChipAllClose = () => {
     dispatch(filtersSlice.actions.clearAll("all"));
     dispatch(filtersSlice.actions.setQueryFilter(queryTable));
+  };
+
+  const [openMoreFilter, setOpenMoreFilter] = useState(false);
+  const toggleOpenMoreFilter = () => {
+    setOpenMoreFilter((preState) => !preState);
   };
 
   return (
@@ -129,16 +137,52 @@ function Filters() {
             }}
           />
 
-          {/* <BodyTypeFilterContent
+          {!openMoreFilter ? (
+            <>
+              <button
+                className="text-primary-color italic ms-4"
+                onClick={toggleOpenMoreFilter}
+              >
+                <span>More Filters</span>
+                <FontAwesomeIcon
+                  icon={faCaretUp}
+                  className="text-primary-color ms-2"
+                />
+              </button>
+            </>
+          ) : (
+            <button
+              className="text-primary-color italic ms-4"
+              onClick={toggleOpenMoreFilter}
+            >
+              <span>Hide Filters</span>
+              <FontAwesomeIcon
+                icon={faCaretDown}
+                className="text-primary-color ms-2"
+              />
+            </button>
+          )}
+        </Stack>
+      )}
+
+      {car_brand && openMoreFilter && (
+        <Stack
+          direction="row"
+          spacing={1}
+          maxWidth={"100%"}
+          sx={{ overflowX: "auto" }}
+        >
+          <BodyTypeFilterContent
             hasButton={true}
             boxStyle={{
               maxHeight: "300px",
               overflowY: "scroll",
               padding: "10px",
             }}
-          /> */}
+          />
         </Stack>
       )}
+
       {car_brand && (
         <Stack
           direction="row"
@@ -299,7 +343,7 @@ function Filters() {
               label={order_by.options[orderBy]}
               variant="filled"
               color="primary"
-              onDelete={() => orderBy === '-posted_at' || handleChipOnClose("orderBy", orderBy)}
+              onDelete={() => handleChipOnClose("orderBy", orderBy)}
             />
           )}
 
@@ -316,27 +360,6 @@ function Filters() {
             onDelete={() => handleChipOnClose("byBodyType", bodyType)}
           />
         ))} */}
-
-          {/* {priceFilter.length ? (
-          <Chip
-            sx={{
-              backgroundColor: "#173559",
-              color: "white",
-              borderRadius: "10px",
-            }}
-            label={
-              VNDFormatToWord2(priceFilter[0]) +
-              " - " +
-              VNDFormatToWord2(priceFilter[1]) +
-              " VND"
-            }
-            variant="filled"
-            color="primary"
-            onDelete={() => handleChipOnClose("byPrice", "")}
-          />
-        ) : (
-          ""
-        )} */}
         </Stack>
       )}
     </>
