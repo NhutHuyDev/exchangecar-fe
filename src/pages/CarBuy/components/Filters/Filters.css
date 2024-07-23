@@ -33,7 +33,7 @@
 }
 
 .item-filter.filtering {
-    background-color: #bde0ff;
+    background-color: #fdcfaf;
     border-radius: 5px;
     border-radius: 5px;
 }
@@ -41,7 +41,6 @@
 .item-filter.active {
     background-color: #e2e4e6;
 }
-
 
 .item-sub {
     border-radius: 5px;
@@ -71,6 +70,10 @@
 .item-sub-filter.active {
     background: var(--primary-color);
     color: #fff;
+}
+
+.css-1gv0vcd-MuiSlider-track {
+    border: unset !important;
 }
 
 

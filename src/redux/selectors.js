@@ -10,12 +10,17 @@ export const relevantCarsSelector = (state) => state.cars.relevantCars;
 export const queryTableSelector = (state) => state.cars.queryTable;
 
 // Filters
-export const byBrandModelFilterSelector = (state) => state.filters.byBrandModel;
-export const byBodyTypeFilterSelector = (state) => state.filters.byBodyType;
+export const byBrandFilterSelector = (state) => state.filters.byBrand;
+export const byModelFilterSelector = (state) => state.filters.byModel;
+export const byCityFilterSelector = (state) => state.filters.byCity;
 export const byPriceFilterSelector = (state) => state.filters.byPrice;
 export const byYearManufactureFilterSelector = (state) =>
   state.filters.byYearManufacture;
+export const byStatusFilterSelector = (state) => state.filters.byStatus;
 export const byKmFilterSelector = (state) => state.filters.byKm;
+export const orderBySelector = (state) => state.filters.orderBy;
+
+export const byBodyTypeFilterSelector = (state) => state.filters.byBodyType;
 export const byTransmissionFilterSelector = (state) =>
   state.filters.byTransmission;
 export const byPageFilterSelector = (state) => state.filters.byPage;

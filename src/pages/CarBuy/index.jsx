@@ -21,7 +21,7 @@ function index() {
           </div>
           <p>At <span className="text-primary-color font-bold">ExchangeCar</span>, we offer you a wide range of choices.</p>
           <Filters />
-          {/* <CarList /> */}
+          <CarList />
         </div>
       </MainLayout>
     </>

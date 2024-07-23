@@ -60,7 +60,7 @@ function App() {
         <Route path="/ban-xe" element={<CarSell />} />
         <Route path="/dinh-gia" element={<CarSell />} />
         <Route path="/thu-cu-doi-moi" element={<CarSell />} />
-        {/* <Route path="/:slug" element={<CarDetail />} /> */}
+        <Route path="/:slug" element={<CarDetail />} />
 
         <Route path="/uoc-luong-gia" element={<FormResult type={1} />} />
         <Route path="/ban-xe/thong-tin" element={<FormResult type={2} />} />

@@ -10,7 +10,8 @@ const carsSlice = createSlice({
     latestPosts: [],
     currentPost: {},
     relevantCars: [],
-    totalPage: 0,
+    totalCars: 0,
+    totalPages: 0,
   },
   extraReducers: (builder) => {
     builder
@@ -19,14 +20,17 @@ const carsSlice = createSlice({
       })
       .addCase(getCars.fulfilled, (state, action) => {
         if (!action.payload.error) {
-          state.cars = action.payload.data;
-          state.totalPage = action.payload.total_page;
+          state.cars = action.payload.car_posts;
+          state.totalPages = action.payload.total_pages;
+          state.totalCars = action.payload.total_cars;
         } else {
           state.cars = [];
-          state.totalPage = 1;
+          state.totalPages = 0;
+          state.totalCars = 0;
         }
         state.status = "idle";
-      }).addCase(getLatestPosts.pending, (state, action) => {
+      })
+      .addCase(getLatestPosts.pending, (state, action) => {
         state.status = "loading";
       })
       .addCase(getLatestPosts.fulfilled, (state, action) => {
@@ -65,8 +69,8 @@ export const getCars = createAsyncThunk(
   async (page, { getState }) => {
     const state = getState();
 
-    const url = `/api/v1/posts/?${state.filters.queryFilter}${
-      state.filters.pageFilter > 1 ? `page=${state.filters.pageFilter}` : ""
+    const url = `/api/v1/posts/?${state.filters.valueFilter}${
+      state.filters.byPage > 1 ? `page=${state.filters.byPage}` : ""
     }`;
 
     let res = {};
@@ -74,9 +78,9 @@ export const getCars = createAsyncThunk(
     try {
       res = await fetchAPI(url);
 
-      console.log(res.data)
+      const { data } = res.data;
 
-      return res.data;
+      return data;
     } catch (error) {
       return { error: true };
     }

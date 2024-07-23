@@ -5,71 +5,25 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import filtersSlice from "redux/reducers/filtersSlice";
 import {
-  byBrandModelFilterSelector,
+  byBrandFilterSelector,
+  byModelFilterSelector,
   queryTableSelector,
 } from "redux/selectors";
 import capitalization from "utils/capitalization";
 
-const brandModelCarData = [
-  {
-    brand: "honda",
-    logo: "/img/car-logo/honda.png",
-    models: ["crv", "civic", "jazz"],
-  },
-  {
-    brand: "toyota",
-    logo: "/img/car-logo/toyota.png",
-    models: [
-      "camry",
-      "fortuner",
-      "land cruiser",
-      "vios",
-      "innova",
-      "corrolla cross",
-    ],
-  },
-  {
-    brand: "ford",
-    logo: "/img/car-logo/ford.png",
-    models: ["everest", "ranger", "ecosport", "ranger raptor"],
-  },
-  {
-    brand: "mazda",
-    logo: "/img/car-logo/mazda.png",
-    models: ["3", "6", "cx8", "cx5"],
-  },
-  {
-    brand: "mercedes",
-    logo: "/img/car-logo/mercedes.svg",
-    models: ["c class", "s class", "e class", "gl class"],
-  },
-  {
-    brand: "nissan",
-    logo: "/img/car-logo/nissan.png",
-    models: ["navara"],
-  },
-  {
-    brand: "mitsubishi",
-    logo: "/img/car-logo/mitsubishi.png",
-    models: ["outlander", "triton", "pajero sport", "xpander cross", "xpander"],
-  },
-  {
-    brand: "kia",
-    logo: "/img/car-logo/kia.png",
-    models: ["sorento", "k3", "seltos", "sedona platinum"],
-  },
-];
-
 function BrandModelFilterContent({ boxStyle, hasButton }) {
   const dispatch = useDispatch();
-  const initFilter = useSelector(byBrandModelFilterSelector);
-  const [filterBrandModel, setFilterBrandModel] = useState(initFilter);
+  const initBrandFilter = useSelector(byBrandFilterSelector);
+  const initModelFilter = useSelector(byModelFilterSelector);
+  const [filterBrand, setFilterBrand] = useState(initBrandFilter);
+  const [filterModel, setFilterModel] = useState(initModelFilter);
   const [currentBrandName, setCurrentBrandName] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
-    setFilterBrandModel(initFilter);
-  }, [initFilter]);
+    setFilterBrand(initBrandFilter);
+    setFilterModel(initModelFilter);
+  }, [initBrandFilter, initModelFilter]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -77,7 +31,8 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
 
   const handleClose = () => {
     setCurrentBrandName(null);
-    setFilterBrandModel(initFilter);
+    setFilterBrand(initBrandFilter);
+    setFilterModel(initModelFilter);
     setAnchorEl(null);
   };
 
@@ -86,8 +41,12 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
 
   // -----------------------------------------------
 
+
+  const { car_brand } = useSelector(queryTableSelector);
+  const queryTable = useSelector(queryTableSelector);
+
   const handleOnclick = (brandName) => {
-    if (currentBrandName == brandName) {
+    if (currentBrandName === brandName) {
       setCurrentBrandName(null);
     } else {
       setCurrentBrandName(brandName);
@@ -99,88 +58,40 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
   };
 
   const handleBrandAllModelToggle = (brand) => {
-    if (filterBrandModel.hasOwnProperty(brand)) {
-      if (filterBrandModel[brand].length == 0) {
-        const newfilterBrandModel = { ...filterBrandModel };
-        delete newfilterBrandModel[brand];
-        setFilterBrandModel({ ...newfilterBrandModel });
-      } else {
-        const keyValue = { [brand]: [] };
-        setFilterBrandModel({ ...filterBrandModel, ...keyValue });
-      }
-    } else {
-      const keyValue = { [brand]: [] };
-      setFilterBrandModel({ ...filterBrandModel, ...keyValue });
-    }
+    setFilterBrand(brand);
+    setFilterModel(null);
   };
-  const handleBrandModelModelToggle = (brand, model) => {
-    if (filterBrandModel.hasOwnProperty(brand)) {
-      if (filterBrandModel[brand].includes(model)) {
-        if (filterBrandModel[brand].length == 1) {
-          const newfilterBrandModel = { ...filterBrandModel };
-          delete newfilterBrandModel[brand];
-          setFilterBrandModel({ ...newfilterBrandModel });
-        } else {
-          const newModelFilter = [...filterBrandModel[brand]];
-          newModelFilter.splice(filterBrandModel[brand].indexOf(model), 1);
 
-          const newfilterBrandModel = { ...filterBrandModel };
-          delete newfilterBrandModel[brand];
-          const updatedKeyValue = { [brand]: [...newModelFilter] };
-          setFilterBrandModel({ ...newfilterBrandModel, ...updatedKeyValue });
-        }
-      } else {
-        const newfilterBrandModel = { ...filterBrandModel };
-        console.log(newfilterBrandModel[brand]);
-        newfilterBrandModel[brand] = [...newfilterBrandModel[brand], model];
-        setFilterBrandModel({ ...newfilterBrandModel });
-      }
-    } else {
-      const keyValue = { [brand]: [model] };
-      setFilterBrandModel({ ...filterBrandModel, ...keyValue });
-    }
+  const handleBrandModelModelToggle = (brand, model) => {
+    setFilterBrand(brand);
+    setFilterModel(model);
   };
 
   const handleFilterBtnOnClick = () => {
-    const filterBrand = [];
-    const filterModel = [];
-    for (const key in filterBrandModel) {
-      if (Object.hasOwnProperty.call(filterBrandModel, key)) {
-        filterBrand.push(key);
-        if (filterBrandModel[key].length) {
-          filterModel.push(...filterBrandModel[key]);
-        }
-      }
-    }
-    console.log(filterBrand);
     dispatch(filtersSlice.actions.setBrandFilter(filterBrand));
     dispatch(filtersSlice.actions.setModelFilter(filterModel));
-    dispatch(filtersSlice.actions.setBrandModelFilter(filterBrandModel));
     dispatch(filtersSlice.actions.setPageFilter(1));
-    dispatch(filtersSlice.actions.setQueryFilter());
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
-    dispatch(filtersSlice.actions.setBrandFilter([]));
-    dispatch(filtersSlice.actions.setModelFilter([]));
-    dispatch(filtersSlice.actions.setBrandModelFilter({}));
+    dispatch(filtersSlice.actions.setBrandFilter(null));
+    dispatch(filtersSlice.actions.setModelFilter(null));
     dispatch(filtersSlice.actions.setPageFilter(1));
-    dispatch(filtersSlice.actions.setQueryFilter());
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
-  const { car_brand } = useSelector(queryTableSelector);
 
   return (
     <>
-      {car_brand ? (
         <>
           <Button
             aria-describedby={id}
-            className={JSON.stringify(initFilter) === "{}" ? "" : "choice"}
+            className={!initBrandFilter ? "" : "choice"}
             onClick={handleClick}
             sx={{
               fontSize: { xs: "10px", sm: "13px", minWidth: "140px" },
@@ -211,166 +122,80 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
                   rowGap: "7px",
                 }}
               >
-                 {Object.keys(car_brand.options).map((brandParam) => {
-                      return (
-                        <>
-                          <div
-                            class={`item-filter ${
-                              filterBrandModel.hasOwnProperty(brandParam)
-                                ? " filtering"
-                                : ""
-                            }
+                {Object.keys(car_brand.options).map((brandParam) => {
+                  return (
+                    <>
+                      <div
+                        class={`item-filter ${
+                          filterBrand === brandParam ? " filtering" : ""
+                        }
                                     ${
                                       brandParam === currentBrandName
                                         ? " active"
                                         : ""
                                     }`}
-                            onClick={() => handleOnclick(brandParam)}
-                            onBlur={() => handleOnBlur()}
-                          >
-                            <img src={car_brand.options[brandParam].logo} alt="" />
-                            <p>{capitalization(car_brand.options[brandParam].value)}</p>
-                          </div>
+                        onClick={() => handleOnclick(brandParam)}
+                        onBlur={() => handleOnBlur()}
+                      >
+                        <img src={car_brand.options[brandParam].logo} alt="" />
+                        <p>
+                          {capitalization(car_brand.options[brandParam].value)}
+                        </p>
+                      </div>
 
+                      <div
+                        class={`item-sub ${
+                          brandParam === currentBrandName ? " active" : ""
+                        }`}
+                        style={{
+                          display: `${
+                            brandParam === currentBrandName ? "block" : "none"
+                          }`,
+                          gridColumn: "span 3 / span 3",  
+                        }}
+                      >
+                        <div className="flex w-full flex-wrap justify-center">
                           <div
-                            class={`item-sub ${
-                              brandParam === currentBrandName
+                            className={`item-sub-filter ${
+                              filterBrand === brandParam && !filterModel
                                 ? " active"
                                 : ""
                             }`}
-                            style={{
-                              display: `${
-                                brandParam === currentBrandName
-                                  ? "block"
-                                  : "none"
-                              }`,
-                              gridColumn: "span 3 / span 3",
-                            }}
-                          >
-                            <div className="flex w-full flex-wrap justify-center">
-                              <div
-                                className={`item-sub-filter ${
-                                  filterBrandModel.hasOwnProperty(
-                                    brandParam
-                                  ) &&
-                                  filterBrandModel[brandParam].length ===
-                                    0
-                                    ? " active"
-                                    : ""
-                                }`}
-                                onClick={() =>
-                                  handleBrandAllModelToggle(brandParam)
-                                }
-                              >
-                                All Model
-                              </div>
-                              {Object.keys(car_brand.options[brandParam].car_model.options).map((modelParam) => (
-                                <div
-                                  className={`item-sub-filter ${
-                                    filterBrandModel.hasOwnProperty(
-                                      brandParam
-                                    ) &&
-                                    filterBrandModel[brandParam].includes(
-                                      modelParam
-                                    )
-                                      ? " active"
-                                      : ""
-                                  }`}
-                                  onClick={() =>
-                                    handleBrandModelModelToggle(
-                                      brandParam,
-                                      modelParam
-                                    )
-                                  }
-                                >
-                                  {capitalization(car_brand.options[brandParam].car_model.options[modelParam])}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </>
-                      );
-                    })}
-                {/* {brandModelCarData.map((brandModel) => {
-                      return (
-                        <>
-                          <div
-                            class={`item-filter ${
-                              filterBrandModel.hasOwnProperty(brandModel.brand)
-                                ? " filtering"
-                                : ""
+                            onClick={() =>
+                              handleBrandAllModelToggle(brandParam)
                             }
-                                    ${
-                                      brandModel.brand === currentBrandName
-                                        ? " active"
-                                        : ""
-                                    }`}
-                            onClick={() => handleOnclick(brandModel.brand)}
-                            onBlur={() => handleOnBlur()}
                           >
-                            <img src={brandModel.logo} alt="" />
-                            <p>{capitalization(brandModel.brand)}</p>
+                            All Model
                           </div>
-
-                          <div
-                            class={`item-sub ${
-                              brandModel.brand === currentBrandName
-                                ? " active"
-                                : ""
-                            }`}
-                            style={{
-                              display: `${
-                                brandModel.brand === currentBrandName
-                                  ? "block"
-                                  : "none"
-                              }`,
-                              gridColumn: "span 3 / span 3",
-                            }}
-                          >
-                            <div className="flex w-full flex-wrap">
-                              <div
-                                className={`item-sub-filter ${
-                                  filterBrandModel.hasOwnProperty(
-                                    brandModel.brand
-                                  ) &&
-                                  filterBrandModel[brandModel.brand].length ===
-                                    0
-                                    ? " active"
-                                    : ""
-                                }`}
-                                onClick={() =>
-                                  handleBrandAllModelToggle(brandModel.brand)
-                                }
-                              >
-                                Tất cả
-                              </div>
-                              {brandModel.models.map((model) => (
-                                <div
-                                  className={`item-sub-filter ${
-                                    filterBrandModel.hasOwnProperty(
-                                      brandModel.brand
-                                    ) &&
-                                    filterBrandModel[brandModel.brand].includes(
-                                      model
-                                    )
-                                      ? " active"
-                                      : ""
-                                  }`}
-                                  onClick={() =>
-                                    handleBrandModelModelToggle(
-                                      brandModel.brand,
-                                      model
-                                    )
-                                  }
-                                >
-                                  {capitalization(model)}
-                                </div>
-                              ))}
+                          {Object.keys(
+                            car_brand.options[brandParam].car_model.options
+                          ).map((modelParam) => (
+                            <div
+                              className={`item-sub-filter ${
+                                filterBrand === brandParam &&
+                                filterModel === modelParam
+                                  ? " active"
+                                  : ""
+                              }`}
+                              onClick={() =>
+                                handleBrandModelModelToggle(
+                                  brandParam,
+                                  modelParam
+                                )
+                              }
+                            >
+                              {capitalization(
+                                car_brand.options[brandParam].car_model.options[
+                                  modelParam
+                                ]
+                              )}
                             </div>
-                          </div>
-                        </>
-                      );
-                    })} */}
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
               </div>
             </Box>
             {hasButton && (
@@ -405,9 +230,6 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
             )}
           </Popover>
         </>
-      ) : (
-        ""
-      )}
     </>
   );
 }
