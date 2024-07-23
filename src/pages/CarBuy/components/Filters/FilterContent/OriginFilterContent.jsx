@@ -1,59 +1,17 @@
-import { Box, Button, Popover, Stack, Typography } from "@mui/material";
+import { Box, Button, Popover, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { byBodyTypeFilterSelector, queryTableSelector } from "redux/selectors";
+import { byOriginFilterSelector, queryTableSelector } from "redux/selectors";
 import filtersSlice from "redux/reducers/filtersSlice";
-const bodyTypeData = [
-  {
-    type: "hatchback",
-    typeDisplay: "Hatchback",
-    image: "/img/body-type/hatchback.png",
-  },
-  {
-    type: "sedan",
-    typeDisplay: "Sedan",
-    image: "/img/body-type/sedan.png",
-  },
-  {
-    type: "suv",
-    typeDisplay: "SUV",
-    image: "/img/body-type/suv.png",
-  },
-  {
-    type: "mpv",
-    typeDisplay: "MPV",
-    image: "/img/body-type/mpv.png",
-  },
-  {
-    type: "coupe",
-    typeDisplay: "Coupe",
-    image: "/img/body-type/coupe.png",
-  },
-  {
-    type: "truck",
-    typeDisplay: "Truck",
-    image: "/img/body-type/truck.png",
-  },
-  {
-    type: "wagon",
-    typeDisplay: "Wagon",
-    image: "/img/body-type/wagon.png",
-  },
-  {
-    type: "convertible",
-    typeDisplay: "Convertible",
-    image: "/img/body-type/convertible.png",
-  },
-];
 
-function BodyTypeFilterContent({ hasButton, boxStyle }) {
+function OriginFilterContent({ hasButton, boxStyle }) {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const initFilter = useSelector(byBodyTypeFilterSelector);
-  const [filterBodyType, setFilterBodyType] = useState(initFilter);
+  const initFilter = useSelector(byOriginFilterSelector);
+  const [filterOrigin, setFilterOrigin] = useState(initFilter);
 
   useEffect(() => {
-    setFilterBodyType(initFilter);
+    setFilterOrigin(initFilter);
   }, [initFilter]);
 
   const handleClick = (event) => {
@@ -62,7 +20,7 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
 
   const handleClose = () => {
     setAnchorEl(null);
-    setFilterBodyType(initFilter);
+    setFilterOrigin(initFilter);
   };
 
   const open = Boolean(anchorEl);
@@ -70,14 +28,14 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
 
   // -----------------------------------------------
   const queryTable = useSelector(queryTableSelector);
-  const { body_type } = useSelector(queryTableSelector);
+  const { car_origin } = useSelector(queryTableSelector);
 
   const handleOnclick = (value) => {
-    setFilterBodyType(value);
+    setFilterOrigin(value);
   };
 
   const handleFilterBtnOnClick = () => {
-    dispatch(filtersSlice.actions.setBodyTypeFilter(filterBodyType));
+    dispatch(filtersSlice.actions.setOriginFilter(filterOrigin));
     dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
 
@@ -85,7 +43,7 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
   };
 
   const handleFilterClearOnClick = () => {
-    dispatch(filtersSlice.actions.setBodyTypeFilter(null));
+    dispatch(filtersSlice.actions.setOriginFilter(null));
     dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
 
@@ -105,7 +63,7 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
           border: "1px solid #f97316 !important",
         }}
       >
-        Body Type
+        Car Origin
       </Button>
       <Popover
         id={id}
@@ -121,31 +79,28 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 150px)",
+              gridTemplateColumns: "repeat(2, 200px)",
               gridAutoFlow: "dense",
               columnGap: "8px",
               rowGap: "8px",
             }}
           >
-            {Object.keys(body_type.options).map((bodyTypeParam) => {
-              return (
-                <>
-                  <div
-                    class={`item-filter ${
-                      filterBodyType === bodyTypeParam ? " filtering" : ""
-                    } `}
-                    style={{
-                      borderBottomLeftRadius: "5px",
-                      borderBottomRightRadius: "5px",
-                    }}
-                    onClick={() => handleOnclick(bodyTypeParam)}
-                  >
-                    <img src={body_type.options[bodyTypeParam].icon} style={{height: '42px'}} alt="" />
-                    <p>{body_type.options[bodyTypeParam].value}</p>
-                  </div>
-                </>
-              );
-            })}
+            {Object.keys(car_origin.options).map((originParam) => (
+              <>
+                <div
+                  class={`item-filter ${
+                    filterOrigin === originParam ? " filtering" : ""
+                  } `}
+                  style={{
+                    borderBottomLeftRadius: "5px",
+                    borderBottomRightRadius: "5px",
+                  }}
+                  onClick={() => handleOnclick(originParam)}
+                >
+                  <p>{car_origin.options[originParam]}</p>
+                </div>
+              </>
+            ))}
           </div>
         </Box>
         {hasButton && (
@@ -164,6 +119,7 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
               Undo
             </Button>
             <Button
+              onClick={handleFilterBtnOnClick}
               sx={{
                 minWidth: "150px",
                 backgroundColor: "#f97316",
@@ -172,7 +128,6 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
                 },
               }}
               variant="contained"
-              onClick={handleFilterBtnOnClick}
             >
               Apply
             </Button>
@@ -183,4 +138,4 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
   );
 }
 
-export default BodyTypeFilterContent;
+export default OriginFilterContent;

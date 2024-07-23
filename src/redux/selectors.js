@@ -19,8 +19,9 @@ export const byYearManufactureFilterSelector = (state) =>
 export const byStatusFilterSelector = (state) => state.filters.byStatus;
 export const byKmFilterSelector = (state) => state.filters.byKm;
 export const orderBySelector = (state) => state.filters.orderBy;
-
 export const byBodyTypeFilterSelector = (state) => state.filters.byBodyType;
+export const byOriginFilterSelector = (state) => state.filters.byOrigin;
+
 export const byTransmissionFilterSelector = (state) =>
   state.filters.byTransmission;
 export const byPageFilterSelector = (state) => state.filters.byPage;

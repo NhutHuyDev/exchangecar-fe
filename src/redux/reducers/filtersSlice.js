@@ -11,9 +11,10 @@ export default createSlice({
     byPrice: [],
     byStatus: null,
     orderBy: null,
-
-    byBodyType: [],
+    byBodyType: null,
     byKm: [],
+    byOrigin: null,
+
     byTransmission: [],
     byPage: 1,
     queryFilter: "",
@@ -76,22 +77,12 @@ export default createSlice({
       state.orderBy = orderByQuery;
 
       // Set byBodyType
-      //  const queryByBodyType = searchParams.get("body_type");
-      //  if (queryByBodyType) {
-      //    state.byBodyType = queryByBodyType.split(",");
-      //  } else {
-      //    state.byBodyType = [];
-      //  }
+      const queryByBodyType = searchParams.get("body_type");
+      state.byBodyType = queryByBodyType;
 
-      // Set byKm
-      // const queryByKm = searchParams.get("car_mileage");
-      // if (queryByKm) {
-      //   state.byKm = queryByKm.split(",").sort(function (a, b) {
-      //     return a - b;
-      //   });
-      // } else {
-      //   state.byKm = [];
-      // }
+      // Set byOrigin
+      const queryByOrigin = searchParams.get("car_origin");
+      state.byOrigin = queryByOrigin;
 
       // Set byTransmission
       // const queryByTransmission = searchParams.get("transmission");
@@ -176,9 +167,20 @@ export default createSlice({
       }
 
       //Body Type Filter
-      // if (state.byBodyType.length) {
-      //   queryArr.push("body_type=" + state.byBodyType.join(","));
-      // }
+      if (state.byBodyType) {
+        queryArr.push("body_type=" + state.byBodyType);
+        valueArr.push(
+          "body_type=" + queryTable.body_type.options[state.byBodyType].value
+        );
+      }
+
+      //Car Origin Filter
+      if (state.byOrigin) {
+        queryArr.push("car_origin=" + state.byOrigin);
+        valueArr.push(
+          "car_origin=" + queryTable.car_origin.options[state.byOrigin]
+        );
+      }
 
       //Price Filter
       // if (state.byPrice.length) {
@@ -224,12 +226,14 @@ export default createSlice({
     setOrderBy: (state, action) => {
       state.orderBy = action.payload;
     },
-
     setBodyTypeFilter: (state, action) => {
       state.byBodyType = action.payload;
     },
     setKmFilter: (state, action) => {
       state.byKm = action.payload;
+    },
+    setOriginFilter: (state, action) => {
+      state.byOrigin = action.payload;
     },
     setTransmissionFilter: (state, action) => {
       state.byTransmission = action.payload;
@@ -247,8 +251,9 @@ export default createSlice({
       state.byStatus = null;
       state.byKm = [];
       state.orderBy = null;
+      state.byBodyType = null;
+      state.byOrigin = null;
 
-      state.byBodyType = [];
       state.byTransmission = [];
       state.byPage = 1;
     },
@@ -287,7 +292,11 @@ export default createSlice({
           break;
 
         case "byBodyType":
-          state.byBodyType.splice(state.byBodyType.indexOf(valueOnClose), 1);
+          state.byBodyType = null;
+          break;
+
+        case "byOrigin":
+          state.byOrigin = null;
           break;
 
         default:

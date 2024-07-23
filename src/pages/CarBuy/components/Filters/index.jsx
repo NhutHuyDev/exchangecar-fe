@@ -24,6 +24,7 @@ import {
   byCityFilterSelector,
   byStatusFilterSelector,
   orderBySelector,
+  byOriginFilterSelector,
 } from "redux/selectors";
 
 import brandModelObjectToArray from "utils/brandModelObjectToArray";
@@ -34,6 +35,7 @@ import OrderByContent from "./FilterContent/OrderByContent";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import OriginFilterContent from "./FilterContent/OriginFilterContent";
 
 function Filters() {
   const dispatch = useDispatch();
@@ -45,13 +47,14 @@ function Filters() {
   const cityFilter = useSelector(byCityFilterSelector);
   const statusFilter = useSelector(byStatusFilterSelector);
   const kmFilter = useSelector(byKmFilterSelector);
+  const bodyTypeFilter = useSelector(byBodyTypeFilterSelector);
+  const priceFilter = useSelector(byPriceFilterSelector);
+  const originFilter = useSelector(byOriginFilterSelector);
   const orderBy = useSelector(orderBySelector);
 
-  const bodyTypeFilter = useSelector(byBodyTypeFilterSelector);
   const queryTable = useSelector(queryTableSelector);
-  const { car_brand, city, car_status, order_by } =
+  const { car_brand, city, car_status, order_by, body_type, car_origin } =
     useSelector(queryTableSelector);
-  const priceFilter = useSelector(byPriceFilterSelector);
 
   const handleChipOnClose = (typeOnClose) => {
     dispatch(filtersSlice.actions.removeFilterValue({ typeOnClose }));
@@ -75,7 +78,7 @@ function Filters() {
           direction={"row"}
           gap={1}
           maxWidth={"100%"}
-          sx={{ overflowX: "auto", paddingBottom: "8px" }}
+          sx={{ overflowX: "auto" }}
         >
           <BrandModelFilterContent
             hasButton={true}
@@ -170,7 +173,7 @@ function Filters() {
           direction="row"
           spacing={1}
           maxWidth={"100%"}
-          sx={{ overflowX: "auto" }}
+          sx={{ overflowX: "auto", paddingBottom: "8px" }}
         >
           <BodyTypeFilterContent
             hasButton={true}
@@ -178,6 +181,15 @@ function Filters() {
               maxHeight: "300px",
               overflowY: "scroll",
               padding: "10px",
+            }}
+          />
+
+          <OriginFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
             }}
           />
         </Stack>
@@ -197,10 +209,9 @@ function Filters() {
           cityFilter ||
           statusFilter ||
           kmFilter.length ||
+          bodyTypeFilter ||
+          originFilter ||
           orderBy ? (
-            // bodyTypeFilter.length ||
-            // priceFilter.length ||
-
             <Chip
               sx={{
                 color: "rgba(255, 0, 0, 0.6)",
@@ -347,19 +358,33 @@ function Filters() {
             />
           )}
 
-          {/* {bodyTypeFilter.map((bodyType) => (
-          <Chip
-            sx={{
-              backgroundColor: "#173559",
-              color: "white",
-              borderRadius: "10px",
-            }}
-            label={bodyType}
-            variant="filled"
-            color="primary"
-            onDelete={() => handleChipOnClose("byBodyType", bodyType)}
-          />
-        ))} */}
+          {bodyTypeFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={body_type.options[bodyTypeFilter].value}
+              variant="filled"
+              color="primary"
+              onDelete={() => handleChipOnClose("byBodyType", bodyTypeFilter)}
+            />
+          )}
+
+          {originFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={car_origin.options[originFilter]}
+              variant="filled"
+              color="primary"
+              onDelete={() => handleChipOnClose("byOrigin", originFilter)}
+            />
+          )}
         </Stack>
       )}
     </>
