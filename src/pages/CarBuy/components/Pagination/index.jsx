@@ -8,11 +8,11 @@ import { useDispatch } from 'react-redux';
 import filtersSlice from 'redux/reducers/filtersSlice';
 import { useEffect } from 'react';
 
-function PaginationPage({ totalPage, currentPage, queryFilter }) {
+function PaginationPage({ totalPage, currentPage, queryFilter, queryTable }) {
     const dispatch = useDispatch()
     const handlePaginationOnClick = (currentPage) => {
         dispatch(filtersSlice.actions.setPageFilter(currentPage))
-        dispatch(filtersSlice.actions.setQueryFilter())
+        dispatch(filtersSlice.actions.setQueryFilter(queryTable))
     }
 
     useEffect(() => {

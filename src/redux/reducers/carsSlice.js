@@ -69,9 +69,7 @@ export const getCars = createAsyncThunk(
   async (page, { getState }) => {
     const state = getState();
 
-    const url = `/api/v1/posts/?${state.filters.valueFilter}${
-      state.filters.byPage > 1 ? `page=${state.filters.byPage}` : ""
-    }`;
+    const url = `/api/v1/posts/?${state.filters.valueFilter}`;
 
     let res = {};
 

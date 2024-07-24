@@ -1,15 +1,16 @@
 .paginationCustom span {
   display: inline-block;
   padding: 2px 7px;
-  background: lightgray;
+  background: rgb(231, 228, 228);
   border-radius: 5px;
   margin: 0 5px;
   cursor: pointer;
+  color: #f97316;
 }
 
 .paginationCustom span.active {
   color: #fff;
-  background: #173559;
+  background: #f97316;
 }
 
 .paginationCustom span.disable {

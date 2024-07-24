@@ -14,8 +14,12 @@ export default createSlice({
     byBodyType: null,
     byKm: [],
     byOrigin: null,
-
-    byTransmission: [],
+    byEngineType: null,
+    byTransmission: null,
+    byDriveTrain: null,
+    byOutColor: null,
+    byTotalSeating: null,
+    byTotalDoors: null,
     byPage: 1,
     queryFilter: "",
     valueFilter: "",
@@ -84,21 +88,37 @@ export default createSlice({
       const queryByOrigin = searchParams.get("car_origin");
       state.byOrigin = queryByOrigin;
 
+      // Set byOrigin
+      const queryByEngineType = searchParams.get("engine_type");
+      state.byEngineType = queryByEngineType;
+
       // Set byTransmission
-      // const queryByTransmission = searchParams.get("transmission");
-      // if (queryByTransmission) {
-      //   state.byTransmission = queryByTransmission.split(",");
-      // } else {
-      //   state.byTransmission = [];
-      // }
+      const queryByTransmission = searchParams.get("transmission");
+      state.byTransmission = queryByTransmission;
+
+      // Set byDrivetrain
+      const queryByDrivetrain = searchParams.get("drivetrain");
+      state.byDriveTrain = queryByDrivetrain;
+
+      // Set byOutColor
+      const queryByOutColor = searchParams.get("out_color");
+      state.byOutColor = queryByOutColor;
+
+      // Set byOutColor
+      const queryByTotalSeating = searchParams.get("total_seating");
+      state.byTotalSeating = queryByTotalSeating;
+
+      // Set byOutColor
+      const queryByTotalDoors = searchParams.get("total_doors");
+      state.byTotalDoors = queryByTotalDoors;
 
       // Set byPage
-      // const queryPage = searchParams.get("page");
-      // if (queryPage) {
-      //   state.byPage = queryPage;
-      // } else {
-      //   state.byPage = 1;
-      // }
+      const queryPage = searchParams.get("page");
+      if (queryPage) {
+        state.byPage = queryPage;
+      } else {
+        state.byPage = 1;
+      }
     },
     setQueryFilter: (state, action) => {
       const queryTable = action.payload;
@@ -182,20 +202,56 @@ export default createSlice({
         );
       }
 
-      //Price Filter
-      // if (state.byPrice.length) {
-      //   queryArr.push("price_filter=" + state.byPrice.join(","));
-      // }
+      //Car Origin Filter
+      if (state.byEngineType) {
+        queryArr.push("engine_type=" + state.byEngineType);
+        valueArr.push(
+          "engine_type=" + queryTable.engine_type.options[state.byEngineType]
+        );
+      }
 
       //byTransmission Filter
-      // if (state.byTransmission.length) {
-      //   queryArr.push("transmission=" + state.byTransmission.join(","));
-      // }
+      if (state.byTransmission) {
+        queryArr.push("transmission=" + state.byTransmission);
+        valueArr.push(
+          "transmission=" +
+            queryTable.transmission.options[state.byTransmission]
+        );
+      }
 
-      //byTransmission Filter
-      // if (state.byPage > 1) {
-      //   queryArr.push("page=" + state.byPage);
-      // }
+      //byDriveTrain Filter
+      if (state.byDriveTrain) {
+        queryArr.push("drivetrain=" + state.byDriveTrain);
+        valueArr.push(
+          "drivetrain=" + queryTable.drivetrain.options[state.byDriveTrain]
+        );
+      }
+
+      //byOutColor Filter
+      if (state.byOutColor) {
+        queryArr.push("out_color=" + state.byOutColor);
+        valueArr.push(
+          "out_color=" + queryTable.out_color.options[state.byOutColor].value
+        );
+      }
+
+      //byTotalSeating Filter
+      if (state.byTotalSeating) {
+        queryArr.push("total_seating=" + state.byTotalSeating);
+        valueArr.push("total_seating=" + state.byTotalSeating);
+      }
+
+      //byTotalDoors Filter
+      if (state.byTotalDoors) {
+        queryArr.push("total_doors=" + state.byTotalDoors);
+        valueArr.push("total_doors=" + state.byTotalDoors);
+      }
+
+      //byPage Filter
+      if (state.byPage > 1) {
+        queryArr.push("page=" + state.byPage);
+        valueArr.push("page=" + state.byPage);
+      }
 
       if (queryArr.length) {
         state.queryFilter = queryArr.join("&");
@@ -235,8 +291,23 @@ export default createSlice({
     setOriginFilter: (state, action) => {
       state.byOrigin = action.payload;
     },
+    setEngineTypeFilter: (state, action) => {
+      state.byEngineType = action.payload;
+    },
     setTransmissionFilter: (state, action) => {
       state.byTransmission = action.payload;
+    },
+    setDrivetrainFilter: (state, action) => {
+      state.byDriveTrain = action.payload;
+    },
+    setOutColorFilter: (state, action) => {
+      state.byOutColor = action.payload;
+    },
+    setTotalSeating: (state, action) => {
+      state.byTotalSeating = action.payload;
+    },
+    setTotalDoors: (state, action) => {
+      state.byTotalDoors = action.payload;
     },
     setPageFilter: (state, action) => {
       state.byPage = action.payload;
@@ -253,13 +324,17 @@ export default createSlice({
       state.orderBy = null;
       state.byBodyType = null;
       state.byOrigin = null;
-
-      state.byTransmission = [];
+      state.byEngineType = null;
+      state.byTransmission = null;
+      state.byDriveTrain = null;
+      state.byOutColor = null;
+      state.byTotalSeating = null;
+      state.byTotalDoors = null;
       state.byPage = 1;
     },
 
     removeFilterValue: (state, action) => {
-      const { typeOnClose, valueOnClose } = action.payload;
+      const { typeOnClose } = action.payload;
 
       switch (typeOnClose) {
         case "byBrandModel":
@@ -297,6 +372,30 @@ export default createSlice({
 
         case "byOrigin":
           state.byOrigin = null;
+          break;
+
+        case "byEngineType":
+          state.byEngineType = null;
+          break;
+
+        case "byTransmission":
+          state.byTransmission = null;
+          break;
+
+        case "byDrivetrain":
+          state.byDriveTrain = null;
+          break;
+
+        case "byOutColor":
+          state.byOutColor = null;
+          break;
+
+        case "byTotalSeating":
+          state.byTotalSeating = null;
+          break;
+
+        case "byTotalDoors":
+          state.byTotalDoors = null;
           break;
 
         default:

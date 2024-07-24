@@ -25,6 +25,12 @@ import {
   byStatusFilterSelector,
   orderBySelector,
   byOriginFilterSelector,
+  byEngineTypeFilterSelector,
+  byTransmissionFilterSelector,
+  byDrivetrainFilterSelector,
+  byOutColorFilterSelector,
+  byTotalDoorsFilterSelector,
+  byTotalSeatingFilterSelector,
 } from "redux/selectors";
 
 import brandModelObjectToArray from "utils/brandModelObjectToArray";
@@ -36,6 +42,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import OriginFilterContent from "./FilterContent/OriginFilterContent";
+import EngineTypeFilterContent from "./FilterContent/EngineTypeFilterContent";
+import TransmissionFilterContent from "./FilterContent/TransmissionFilterContent";
+import DrivetrainFilterContent from "./FilterContent/DrivetrainFilterContent";
+import OutColorFilterContent from "./FilterContent/OutColorFilterContent";
+import TotalSeatingFilterContent from "./FilterContent/TotalSeatingFilterContent";
+import TotalDoorsFilterContent from "./FilterContent/TotalDoorsFilterContent";
 
 function Filters() {
   const dispatch = useDispatch();
@@ -50,11 +62,29 @@ function Filters() {
   const bodyTypeFilter = useSelector(byBodyTypeFilterSelector);
   const priceFilter = useSelector(byPriceFilterSelector);
   const originFilter = useSelector(byOriginFilterSelector);
+  const engineTypeFilter = useSelector(byEngineTypeFilterSelector);
+  const transmissionFilter = useSelector(byTransmissionFilterSelector);
+  const drivetrainFilter = useSelector(byDrivetrainFilterSelector);
+  const outColorFilter = useSelector(byOutColorFilterSelector);
+  const totalSeatingFilter = useSelector(byTotalSeatingFilterSelector);
+  const totalDoorsFilter = useSelector(byTotalDoorsFilterSelector);
   const orderBy = useSelector(orderBySelector);
 
   const queryTable = useSelector(queryTableSelector);
-  const { car_brand, city, car_status, order_by, body_type, car_origin } =
-    useSelector(queryTableSelector);
+  const {
+    car_brand,
+    city,
+    car_status,
+    order_by,
+    body_type,
+    car_origin,
+    engine_type,
+    transmission,
+    drivetrain,
+    out_color,
+    total_seating,
+    total_doors,
+  } = useSelector(queryTableSelector);
 
   const handleChipOnClose = (typeOnClose) => {
     dispatch(filtersSlice.actions.removeFilterValue({ typeOnClose }));
@@ -192,6 +222,60 @@ function Filters() {
               padding: "20px",
             }}
           />
+
+          <EngineTypeFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
+
+          <TransmissionFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
+
+          <DrivetrainFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
+
+          <OutColorFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
+
+          <TotalSeatingFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
+
+          <TotalDoorsFilterContent
+            hasButton={true}
+            boxStyle={{
+              maxHeight: "300px",
+              overflowY: "scroll",
+              padding: "20px",
+            }}
+          />
         </Stack>
       )}
 
@@ -211,6 +295,11 @@ function Filters() {
           kmFilter.length ||
           bodyTypeFilter ||
           originFilter ||
+          transmissionFilter ||
+          drivetrainFilter ||
+          outColorFilter ||
+          totalSeatingFilter ||
+          totalDoorsFilter ||
           orderBy ? (
             <Chip
               sx={{
@@ -383,6 +472,100 @@ function Filters() {
               variant="filled"
               color="primary"
               onDelete={() => handleChipOnClose("byOrigin", originFilter)}
+            />
+          )}
+
+          {engineTypeFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={engine_type.options[engineTypeFilter]}
+              variant="filled"
+              color="primary"
+              onDelete={() =>
+                handleChipOnClose("byEngineType", engineTypeFilter)
+              }
+            />
+          )}
+
+          {transmissionFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={transmission.options[transmissionFilter]}
+              variant="filled"
+              color="primary"
+              onDelete={() =>
+                handleChipOnClose("byTransmission", transmissionFilter)
+              }
+            />
+          )}
+
+          {drivetrainFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={drivetrain.options[drivetrainFilter]}
+              variant="filled"
+              color="primary"
+              onDelete={() =>
+                handleChipOnClose("byDrivetrain", drivetrainFilter)
+              }
+            />
+          )}
+
+          {outColorFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={out_color.options[outColorFilter].value}
+              variant="filled"
+              color="primary"
+              onDelete={() => handleChipOnClose("byOutColor", outColorFilter)}
+            />
+          )}
+
+          {totalSeatingFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={totalSeatingFilter + " seats"}
+              variant="filled"
+              color="primary"
+              onDelete={() =>
+                handleChipOnClose("byTotalSeating", totalSeatingFilter)
+              }
+            />
+          )}
+
+          {totalDoorsFilter && (
+            <Chip
+              sx={{
+                backgroundColor: "#fa9148",
+                color: "white",
+                borderRadius: "10px",
+              }}
+              label={totalDoorsFilter + " doors"}
+              variant="filled"
+              color="primary"
+              onDelete={() =>
+                handleChipOnClose("byTotalDoors", totalDoorsFilter)
+              }
             />
           )}
         </Stack>

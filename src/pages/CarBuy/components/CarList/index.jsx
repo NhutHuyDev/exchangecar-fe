@@ -27,6 +27,7 @@ import {
   queryFilterSelector,
   byPageFilterSelector,
   queryTableSelector,
+  totalCarsSelector,
 } from "redux/selectors";
 
 function CarList() {
@@ -35,6 +36,7 @@ function CarList() {
 
   const cars = useSelector(allCarsSelector);
   const totalPage = useSelector(carTotalPageSelector);
+  const totalCars = useSelector(totalCarsSelector);
   const statusCars = useSelector(statusCarsSelector);
   const queryFilter = useSelector(queryFilterSelector);
   const queryTable = useSelector(queryTableSelector);
@@ -60,28 +62,41 @@ function CarList() {
     <>
       {statusCars === "idle" ? (
         <>
+          <p className="font-bold text-primary-color text-right">
+            {totalCars + (totalCars > 1 ? " Cars" : " Car")}
+          </p>
           <div className="grid grid-cols-1 lg:grid-cols-3">
-            {cars.map((car) => (
+            {cars.map((carPost) => (
               <Link
-                key={car.slug}
+                key={carPost.car.car_slug}
                 className="mx-2 my-2"
-                to={`/${car.slug}`}
+                to={`/${carPost.car.car_slug}`}
                 reloadDocument
               >
-                <CarCard postData={car} />
+                <CarCard postData={carPost} />
               </Link>
             ))}
           </div>
 
-          {/* {cars.length ?
-                                <div className="flex justify-center my-2">
-                                    <PaginationPage totalPage={totalPage} currentPage={pageFilter} queryFilter={queryFilter} />
-                                </div> :
-                                <div className="mt-4 d-flex flex-column justify-content-center text-center">
-                                    <h2> Không tìm thấy xe được rao bán</h2>
-                                    <img src={'/img/banner-img.png'} className="w-100 d-block m-auto mt-4" alt={'/img/banner-img.png'} />
-                                </div>
-                            } */}
+          {cars.length ? (
+            <div className="flex justify-center my-2">
+              <PaginationPage
+                totalPage={totalPage}
+                currentPage={pageFilter}
+                queryFilter={queryFilter}
+                queryTable={queryTable}
+              />
+            </div>
+          ) : (
+            <div className="mt-4 d-flex flex-column justify-content-center text-center">
+              <h2 className="font-bold text-secondary-color">No cars found for sale</h2>
+              <img
+                src={"/img/not-found-car.png"}
+                className="w-100 d-block m-auto mt-4"
+                alt={"/img/not-found-car.png"}
+              />
+            </div>
+          )}
         </>
       ) : (
         <div className="grid grid-cols-3">

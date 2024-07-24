@@ -134,7 +134,7 @@ function MainNavbar() {
               >
                 <div className="grid grid-cols-2 bg-[white] w-80  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] p-2 font-bold">
                   <Link to="/buy-car" className={`p-1 col-span-2 ${car_brand ? 'mb-2' : ''}`}>
-                    Tất cả xe
+                    All Cars
                   </Link>
                   {car_brand
                     ? Object.keys(car_brand.options).map((option) => (
