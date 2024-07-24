@@ -1,17 +1,26 @@
-import AuthLayout from 'layout/AuthLayout'
-import LoginForm from './components/form/Login'
-import CreateAccountForm from './components/form/CreateAccount'
-import ActivePhoneNumberForm from './components/form/ActivePhone'
+import AuthLayout from "layout/AuthLayout";
+import SignInForm from "./components/form/SignIn";
+
+import SignUpForm from "./components/form/SignUp";
+import OtpCreateAccountForm from "./components/form/OtpCreateAccount";
+
+import ForgotPasswordForm from "./components/form/ForgotPassword";
+import OtpResetPasswordForm from "./components/form/OtpResetPassword";
 
 function Auth({ page }) {
-    return <AuthLayout> 
-        {page === 'login' && <LoginForm />}
+  return (
+    <AuthLayout>
+      {page === "sign-in" && <SignInForm />}
 
-        {page === 'create-account' && <CreateAccountForm />}
+      {page === "sign-up" && <SignUpForm />}
 
-        {page === 'otp' && <ActivePhoneNumberForm />}
+      {page === "otp-create-account" && <OtpCreateAccountForm />}
 
+      {page === "forgot-password" && <ForgotPasswordForm />}
+
+      {page === "otp-reset-password" && <OtpResetPasswordForm />}
     </AuthLayout>
+  );
 }
 
-export default Auth
+export default Auth;

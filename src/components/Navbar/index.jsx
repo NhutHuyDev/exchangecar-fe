@@ -96,7 +96,7 @@ function MainNavbar() {
               <FontAwesomeIcon icon={faPhone} className="me-1" />
               098 6578 655
             </a>
-            <Link to="/login" className="p-2 ">
+            <Link to="/auth/sign-in" className="p-2 ">
               Sign In / Sign Up
             </Link>
           </div>

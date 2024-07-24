@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import priceScope from "JsonUI/priceScope";
 
@@ -10,10 +10,28 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import capitalization from "utils/capitalization";
 import { useSelector } from "react-redux";
 import { queryTableSelector } from "redux/selectors";
+import { useState } from "react";
 
 function HeroFunctions() {
   const queryTable = useSelector(queryTableSelector);
   const { car_brand, body_type } = queryTable;
+
+  const [carSearch, setCarSearch] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleCarSearchChange = (e) => {
+    if (e.key !== "Enter") {
+      setCarSearch(e.target.value);
+    }   
+  };
+
+  const searchCarWhenEnter = (e) => {
+    if (e.key === "Enter") {
+      const searchUrl = carSearch !== "" ? `/buy-car?search=${carSearch}` : "/buy-car";
+      navigate(searchUrl)
+    } 
+  };
 
   return (
     <>
@@ -31,7 +49,13 @@ function HeroFunctions() {
                   icon={faMagnifyingGlass}
                   className="text-primary-color"
                 />
-                <input className="text-[black] w-full" placeholder="Search" />
+                <input
+                  className="text-[black] w-full"
+                  placeholder="Search"
+                  value={carSearch}
+                  onChange={handleCarSearchChange}
+                  onKeyDown={searchCarWhenEnter}
+                />
               </div>
             </div>
 

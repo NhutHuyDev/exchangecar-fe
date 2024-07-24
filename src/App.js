@@ -1,7 +1,7 @@
 import Home from "./pages/Home";
-import AboutUs from "./pages/AboutUs"
-import Services from "./pages/Services"
-import FaQ from "./pages/FaQ"
+import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
+import FaQ from "./pages/FaQ";
 import ProtectedRoute from "components/Routing/ProtectedRoute";
 import BuyCars from "./pages/CarBuy";
 import CarDetail from "./pages/CarDetail";
@@ -11,8 +11,8 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import AnonymousRoute from "components/Routing/AnonymousRoute";
 import CarSell from "./pages/CarSell";
-import { useEffect } from 'react'
-import { getQueryTable } from 'redux/reducers/carsSlice'
+import { useEffect } from "react";
+import { getQueryTable } from "redux/reducers/carsSlice";
 import { currentUserSelector, isAuthenticatedSelector } from "redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import authSlice from "redux/reducers/authSlice";
@@ -30,21 +30,21 @@ function App() {
   const currentUser = useSelector(currentUserSelector);
 
   useEffect(() => {
-    const isAuthenticatedStorage = localStorage.getItem("isAuthenticated")
-    const currentUserStorage = JSON.parse(localStorage.getItem("currentUser"))
+    const isAuthenticatedStorage = localStorage.getItem("isAuthenticated");
+    const currentUserStorage = JSON.parse(localStorage.getItem("currentUser"));
     if (isAuthenticatedStorage && isAuthenticatedStorage === "true") {
-      dispatch(authSlice.actions.verifyToken(currentUserStorage || {}))
+      dispatch(authSlice.actions.verifyToken(currentUserStorage || {}));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated)
-    localStorage.setItem("currentUser", JSON.stringify(currentUser))
-  }, [isAuthenticated, currentUser])
+    localStorage.setItem("isAuthenticated", isAuthenticated);
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  }, [isAuthenticated, currentUser]);
 
   useEffect(() => {
-    dispatch(getQueryTable())
-  }, [dispatch])
+    dispatch(getQueryTable());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -53,30 +53,30 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/services" element={<Services />} />
         <Route path="/faq" element={<FaQ />} />
-        <Route path="/login" element={<Auth page="login" />} />
-        <Route path="/create-account" element={<Auth page="create-account" />} />
-        <Route path="/otp" element={<Auth page="otp" />} />
+
+        <Route path="/auth/sign-in" element={<Auth page="sign-in" />} />
+        <Route path="/auth/sign-up" element={<Auth page="sign-up" />}/>
+        <Route path="/auth/otp/create-account" element={<Auth page="otp-create-account" />} />
+        <Route path="/auth/create-account" element={<Auth page="create-account" />}/>
+        <Route path="/auth/forgot-password" element={<Auth page="forgot-password" />}/>
+        <Route path="/auth/otp/reset-password" element={<Auth page="otp-reset-password" />} />
+        
         <Route path="/buy-car" element={<BuyCars />} />
-        <Route path="/ban-xe" element={<CarSell />} />
-        <Route path="/dinh-gia" element={<CarSell />} />
-        <Route path="/thu-cu-doi-moi" element={<CarSell />} />
         <Route path="/:slug" element={<CarDetail />} />
 
-        <Route path="/uoc-luong-gia" element={<FormResult type={1} />} />
-        <Route path="/ban-xe/thong-tin" element={<FormResult type={2} />} />
-        <Route path="/thu-cu-doi-moi/thong-tin" element={<FormResult type={3} />} />
-
-
+        {/* <Route path="/dinh-gia" element={<CarSell />} /> */}
+        {/* <Route path="/ban-xe" element={<CarSell />} /> */}
+        {/* <Route path="/thu-cu-doi-moi" element={<CarSell />} /> */}
+        {/* <Route path="/uoc-luong-gia" element={<FormResult type={1} />} /> */}
+        {/* <Route path="/ban-xe/thong-tin" element={<FormResult type={2} />} /> */}
+        {/* <Route path="/thu-cu-doi-moi/thong-tin" element={<FormResult type={3} />} /> */}
         {/* <Route element={<AnonymousRoute />}>
         </Route>
-
         <Route path="/account" element={<ProtectedRoute />}>
           <Route path="/account/:slug" element={<UserDashboard />} />
         </Route>
-
         <Route path="/not-found" element={<NotFound />} /> */}
       </Routes>
-
     </div>
   );
 }

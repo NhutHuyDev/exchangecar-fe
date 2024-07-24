@@ -21,6 +21,7 @@ export default createSlice({
     byTotalSeating: null,
     byTotalDoors: null,
     byPage: 1,
+    bySearch: "",
     queryFilter: "",
     valueFilter: "",
   },
@@ -76,7 +77,7 @@ export default createSlice({
         state.byKm = [];
       }
 
-      // Set byStatus
+      // Set OrderBy
       const orderByQuery = searchParams.get("order_by");
       state.orderBy = orderByQuery;
 
@@ -118,6 +119,14 @@ export default createSlice({
         state.byPage = queryPage;
       } else {
         state.byPage = 1;
+      }
+
+      // Set bySearch
+      const queryBySearch = searchParams.get("search");
+      if (queryBySearch && queryBySearch !== "") {
+        state.bySearch = queryBySearch;
+      } else {
+        state.bySearch = '';
       }
     },
     setQueryFilter: (state, action) => {
@@ -253,6 +262,12 @@ export default createSlice({
         valueArr.push("page=" + state.byPage);
       }
 
+      //bySearch Filter
+      if (state.bySearch && state.bySearch !== "") {
+        queryArr.push("search=" + state.bySearch);
+        valueArr.push("search=" + state.bySearch);
+      }
+
       if (queryArr.length) {
         state.queryFilter = queryArr.join("&");
         state.valueFilter = valueArr.join("&");
@@ -330,6 +345,7 @@ export default createSlice({
       state.byOutColor = null;
       state.byTotalSeating = null;
       state.byTotalDoors = null;
+      state.bySearch = "";
       state.byPage = 1;
     },
 
