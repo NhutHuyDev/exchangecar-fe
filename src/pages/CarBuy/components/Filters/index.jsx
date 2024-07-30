@@ -447,7 +447,7 @@ function Filters() {
             />
           )}
 
-          {bodyTypeFilter && (
+          {bodyTypeFilter && body_type.options[bodyTypeFilter] && (
             <Chip
               sx={{
                 backgroundColor: "#fa9148",

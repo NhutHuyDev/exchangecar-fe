@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faCaretDown,
-  faEarthAsia,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -16,7 +15,7 @@ import { queryTableSelector } from "redux/selectors";
 function MainNavbar() {
   const [showPopover, setShowPopover] = useState([]);
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
-  const { hoverProps, isHovered } = useHover({
+  const { hoverProps } = useHover({
     onHoverStart: (e) =>
       setShowPopover(() => [e.target.getAttribute("data-hover-index")]),
     onHoverEnd: (e) => setShowPopover(() => []),

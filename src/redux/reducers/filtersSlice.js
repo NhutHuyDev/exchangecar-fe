@@ -199,7 +199,7 @@ export default createSlice({
       if (state.byBodyType) {
         queryArr.push("body_type=" + state.byBodyType);
         valueArr.push(
-          "body_type=" + queryTable.body_type.options[state.byBodyType].value
+          "body_type=" + queryTable.body_type.options[state.byBodyType]?.value
         );
       }
 
