@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faCaretDown,
-  faEarthAsia,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
