@@ -5,14 +5,14 @@
 
 :root {
   --primary-color: #f97316;
-  --second-color: #173559;
+  --second-color: #333;
   --grey-color: #c5c5c5;
 
   --height-navbar: 64px;
 } 
 
 * {
-  border-color: var(--second-color) !important;
+  border-color: var(--second-color);
   outline: var(--second-color) !important; 
   -webkit-tap-highlight-color: transparent;
 }

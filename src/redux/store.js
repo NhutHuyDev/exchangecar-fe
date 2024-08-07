@@ -3,6 +3,7 @@ import carsSlice from "./reducers/carsSlice";
 import filtersSlice from "./reducers/filtersSlice";
 import authSlice from "./reducers/authSlice";
 import sellCarSlice from "./reducers/sellCarSlice";
+import formSlice from "./reducers/formSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     filters: filtersSlice.reducer,
     auth: authSlice.reducer,
     sellCar: sellCarSlice.reducer,
+    form: formSlice.reducer
   },
 });
 

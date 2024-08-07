@@ -96,7 +96,9 @@ export const getCar = createAsyncThunk("/car/getCar", async (slug) => {
 export const getLatestPosts = createAsyncThunk(
   "/cars/getLatestPosts",
   async () => {
-    const res = await fetchAPI("/api/v1/posts/latest");
+    const res = await fetchAPI("/api/v1/posts/latest", "get", { headers: {
+      'Content-Type': 'application/json',
+    }});
 
     const { data } = res.data;
 

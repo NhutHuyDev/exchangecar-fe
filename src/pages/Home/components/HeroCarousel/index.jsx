@@ -15,7 +15,7 @@ function HeroCarousel() {
         'img/hero-carousel/hero-carousel-03.png',
     ]
     return (
-        <div id='hero-carousel' className='mt-16'>
+        <div id='hero-carousel' className='mt-24'>
             <Swiper
                 loop={true}
                 modules={[Navigation, Autoplay, Pagination]}

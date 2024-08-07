@@ -7,7 +7,7 @@ module.exports = {
         DEFAULT: "#f97316",
         500: "#2c64a9",
       },
-      "secondary-color": "#173559",
+      "secondary-color": "#333",
       "grey-color": {
         DEFAULT: "#f4f6f8",
         200: "#a4a2a2",

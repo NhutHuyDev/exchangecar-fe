@@ -44,3 +44,6 @@ export const otpVerificationSelector = (state) => state.auth.otpVerification;
 
 // Upload
 export const carDataSelector = (state) => state.sellCar.carData;
+
+// Form
+export const formDataSelector = (state) => state.form.data

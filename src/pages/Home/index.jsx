@@ -3,9 +3,15 @@ import HeroCarousel from './components/HeroCarousel'
 import HeroFunctions from './components/HeroFunctions'
 import CertifiedCars from './components/CertifiedCars'
 import Contact from 'components/Contact'
+import { useEffect } from 'react'
 
 
 function Homepage() {
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
   return (
     <>
       <MainLayout>

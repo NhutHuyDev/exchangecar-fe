@@ -1,34 +1,49 @@
 import axios from 'axios'
 
 import constaints from '../constaints'
+import { showToastError } from 'utils'
 
 const fetchAPI = async (apiEndpoint, method, payload) => {
     // Fetch API
-    const apiUrl = constaints.host + apiEndpoint
-
     let callApi = {}
+    const apiUrl = constaints.host + apiEndpoint
+    let headers = {
+        'Content-Type': 'application/json',
+    }
+
+    if(payload.headers){
+        headers = {...headers, ...payload.headers}
+    }
 
     if (method === 'get' || !method) {
         try {
-            callApi = axios.get(apiUrl)
+            callApi = await axios.get(apiUrl, {
+                headers: headers
+            })
             return callApi
         } catch (error) {
+            showToastError(error.message)
             return error
         }
     } 
     if (method === 'post' && payload != null) {
         try {
-            callApi = axios.post(apiUrl, {...payload})
+            const data = payload.data
+            callApi = await axios.post(apiUrl, data, {
+                headers: headers
+            })
             return callApi
         } catch (error) {
+            showToastError(error.message)
             return error
         }
     }
     if (method === 'put' && payload != null) {
         try {
-            callApi = axios.put(apiUrl, {...payload})
+            callApi = await axios.put(apiUrl, {...payload})
             return callApi
         } catch (error) {
+            showToastError(error.message)
             return error
         }
     }

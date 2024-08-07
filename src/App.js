@@ -16,6 +16,7 @@ import { getQueryTable } from "redux/reducers/carsSlice";
 import { currentUserSelector, isAuthenticatedSelector } from "redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import authSlice from "redux/reducers/authSlice";
+import { ToastContainer } from 'react-toastify';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -23,19 +24,23 @@ import "swiper/css/zoom";
 import "swiper/css/thumbs";
 
 import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const currentUser = useSelector(currentUserSelector);
 
-  useEffect(() => {
-    const isAuthenticatedStorage = localStorage.getItem("isAuthenticated");
-    const currentUserStorage = JSON.parse(localStorage.getItem("currentUser"));
-    if (isAuthenticatedStorage && isAuthenticatedStorage === "true") {
-      dispatch(authSlice.actions.verifyToken(currentUserStorage || {}));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const isAuthenticatedStorage = localStorage.getItem("isAuthenticated");
+  //   const currentUserStorage = localStorage.getItem("currentUser")
+  //   console.log(currentUserStorage);
+    
+  //   const existUser = JSON.parse(currentUserStorage !== "undefined" ? currentUserStorage : "");
+  //   if (isAuthenticatedStorage && isAuthenticatedStorage === true && !isObjectEmpty(existUser)) {
+  //     dispatch(authSlice.actions.verifyToken(existUser || {}));
+  //   }
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem("isAuthenticated", isAuthenticated);
@@ -47,7 +52,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="App ">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
@@ -77,6 +82,7 @@ function App() {
         </Route>
         <Route path="/not-found" element={<NotFound />} /> */}
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

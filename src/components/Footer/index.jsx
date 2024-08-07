@@ -50,15 +50,15 @@ function Footer() {
     ]
     return (
         <>
-            <div className='bg-[#75370d] px-3 py-8 xl:px-20' style={{backgroundImage: 'url("/img/footer.png")'}}>
+            <div className='bg-primary-color bg-opacity-90 px-3 py-8 xl:px-20' style={{backgroundImage: 'url("/img/footer.png")'}}>
                 <div className="flex flex-col items-center leading-7">                   
                     <div className="grid grid-cols-1 md:grid-cols-10 xl:grid-cols-10 gap-8 text-grey-color my-10">
                         <div className="col-span-10 md:col-span-5 xl:col-span-4 2xl:col-span-4">
                             <div className="text-4xl font-semibold mb-3">ExchangeCar</div>
-                            <p className="">Professional car trading service platform. Provides customers with a seamless, fast, and reliable experience.</p>
+                            <p className="font-semibold">Professional car trading service platform. Provides customers with a seamless, fast, and reliable experience.</p>
                         </div>
                         <div className="col-span-10 md:col-span-4 xl:col-span-3 2xl:col-span-3">
-                            <div className="text-2xl font-medium mb-4">Contact</div>
+                            <div className="text-2xl font-bold mb-4">Contact</div>
                             <div className="uppercase font-extrabold text-sm mb-2">ExchangeCar Technology Investment Joint Stock Company</div>
                             {
                                 contacts_infors.map((contact, index) =>
@@ -83,11 +83,11 @@ function Footer() {
                                                     )
                                                 }
                                             </Collapse>
-                                            <div className="hidden md:block text-2xl font-medium mb-4">{item.title}</div>
+                                            <div className="hidden md:block text-2xl font-bold mb-4">{item.title}</div>
                                             {
                                                 item.sections.map((section, index) =>
                                                     <div className='hidden md:block mb-2'  key={'section-mobile-' + index}>
-                                                        <a href={section.path} className='text-grey-color hover:text-grey-color-200'> {section.section}</a>
+                                                        <a href={section.path} className='text-grey-color hover:text-opacity-80 font-semibold'> {section.section}</a>
                                                     </div>
                                                 )
                                             }
@@ -100,7 +100,7 @@ function Footer() {
                     </div>
                     <div style={{ height: '0.75px' }} className='w-full bg-grey-color rounded-full'></div>
                     <div className='mt-4 text-grey-color'>
-                        <p className='text-lg mb-2'>© Copyright 2024 ExchangeCar. All rights reserved.</p>
+                        <p className='text-lg mb-2 font-semibold'>© Copyright 2024 ExchangeCar. All rights reserved.</p>
                     </div>
                 </div>
             </div>
