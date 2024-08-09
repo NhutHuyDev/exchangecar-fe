@@ -21,7 +21,7 @@ function Certified() {
       id="certificate"
       className="px-3 py-8 xl:px-20 xl:py-12 bg-grey-color"
     >
-      <div className="text-secondary-color p-11 mt-10 mb-14 rounded-2xl shadow-2xl background-primary-linear flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 justify-start lg:justify-around items-stretch">
+      <div className="text-[#fff] p-11 mt-10 mb-14 rounded-2xl shadow-2xl bg-primary-color flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 justify-start lg:justify-around items-stretch">
         <div className="h-full flex lg:justify-center items-center">
           <div className="border-y-secondary-color">
             <p>Certificate</p>
@@ -119,7 +119,7 @@ function Certified() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl" />
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl text-primary-color" />
                 </div>
               </div>
               <div className="w-full h-[1px] bg-grey-color-200 bg-opacity-25 rounded-full my-3"></div>
@@ -135,7 +135,7 @@ function Certified() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl" />
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl text-primary-color" />
                 </div>
               </div>
               <div className="w-full h-[1px] bg-grey-color-200 bg-opacity-25 rounded-full my-3"></div>
@@ -151,7 +151,7 @@ function Certified() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl" />
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl text-primary-color" />
                 </div>
               </div>
               <div className="w-full h-[1px] bg-grey-color-200 bg-opacity-25 rounded-full my-3"></div>
@@ -166,7 +166,7 @@ function Certified() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl" />
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-xl text-primary-color" />
                 </div>
               </div>
             </div>

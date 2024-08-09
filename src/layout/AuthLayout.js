@@ -1,5 +1,6 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Logo from "common/Logo";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,11 +20,11 @@ function AuthLayout({ children }) {
   // }, [ navigate, isAuthenticated, currentUser])
 
   return (
-    <div className="h-[100vh] flex justify-center bg-primary-color background-primary-linear items-center ">
+    <div className="h-[100vh] flex justify-center md:bg-primary-color items-center ">
       <div className="h-full flex-1  hidden lg:flex justify-center items-center  relative">
         <div className="my-auto"> 
           <Link className="text-[white]">
-            <span className="text-8xl tracking-wide text-[white] font-black italic">
+            <span className="text-6xl xl:text-8xl tracking-wide text-[white] font-black italic">
               ExchangeCar
             </span>
           </Link>
@@ -36,7 +37,10 @@ function AuthLayout({ children }) {
           </Link>
         </div>
       </div>
-      <div className="flex-1 flex justify-center items-center bg-[#fff] h-full rounded-tl-3xl rounded-bl-3xl">{children}</div>
+      <div className="flex-1 flex justify-center items-center bg-[#fff] h-full rounded-tl-3xl rounded-bl-3xl">
+        <Logo className='absolute top-[10px] !h-32 !w-32 xl:!w-40 xl:!h-40 rounded-full box-shadow-custom animate-fly-in' />
+        {children}
+      </div>
     </div>
   );
 }

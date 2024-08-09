@@ -140,12 +140,6 @@ function SignUpForm() {
         </div>
 
         <button
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   navigate("/auth/otp/create-account", {
-          //     state: { mobilePhone: mobilePhone },
-          //   });
-          // }}
           type="submit"
           className="p-4 rounded-xl w-full bg-primary-color text-[white] font-semibold"
         >

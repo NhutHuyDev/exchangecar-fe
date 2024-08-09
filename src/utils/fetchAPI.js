@@ -10,28 +10,32 @@ const fetchAPI = async (apiEndpoint, method, payload) => {
     let headers = {
         'Content-Type': 'application/json',
     }
-
-    if(payload.headers){
+    
+    if(payload && payload.headers){
         headers = {...headers, ...payload.headers}
     }
 
     if (method === 'get' || !method) {
         try {
+            
+            console.log("headers",headers, apiUrl, apiEndpoint);
             callApi = await axios.get(apiUrl, {
                 headers: headers
             })
+
+            // console.log(callApi);
+            
             return callApi
         } catch (error) {
-            showToastError(error.message)
+            console.log("header error",headers, apiUrl, apiEndpoint);
+            showToastError({message: error.message})
             return error
         }
     } 
     if (method === 'post' && payload != null) {
         try {
             const data = payload.data
-            callApi = await axios.post(apiUrl, data, {
-                headers: headers
-            })
+            callApi = await axios.post(apiUrl, data)
             return callApi
         } catch (error) {
             showToastError(error.message)

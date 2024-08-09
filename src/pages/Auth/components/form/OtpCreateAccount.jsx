@@ -39,7 +39,7 @@ function OtpCreateAccountForm() {
 
   return (
     <div className="w-3/4 lg:w-7/12 flex flex-col space-y-5 justify-center items-center">
-      <h2 className="font-semibold text-center text-2xl md:text-3xl text-primary-color px-2 md:px-3 ">
+      <h2 className="font-bold italic text-center text-2xl md:text-3xl text-primary-color px-2 md:px-3 ">
         Phone number verification
       </h2>
       <span>

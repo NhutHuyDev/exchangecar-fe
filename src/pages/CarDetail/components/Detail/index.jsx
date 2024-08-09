@@ -97,12 +97,12 @@ function Detail({ image, currentPost }) {
           <div className="col-span-8 xl:col-span-3">
             <div className="rounded-2xl shadow-2xl bg-grey-color h-full p-6">
               <div>
-                <div className="flex space-x-2 items-center bg-primary-color text-secondary-color w-fit p-1 rounded-2xl text-xs">
-                  <FontAwesomeIcon icon={faCertificate} />
-                  <span className="font-bold">ExchangeCar</span>
+                <div className="flex space-x-2 items-center bg-primary-color text-[#fff] w-fit p-1 rounded-2xl text-xs">
+                  <FontAwesomeIcon icon={faCertificate}/>
+                  <span className="font-bold text-[#FFF]">ExchangeCar</span>
                 </div>
                 <div className="mt-2">
-                  <h1 className="font-extrabold text-2xl text-primary-color">
+                  <h1 className="font-extrabold text-2xl text-primary-color capitalize">
                     {currentPost?.car?.car_name}
                   </h1>
                 </div>
@@ -125,7 +125,7 @@ function Detail({ image, currentPost }) {
                         million
                       </span>
                     </strong>
-                    <span className="text-lg">(VND)</span>
+                    <span className="text-lg font-semibold">(VND)</span>
                   </div>
                 </div>
                 <div className="italic font-medium text-sm xl:text-end mt-2">

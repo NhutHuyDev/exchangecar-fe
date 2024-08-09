@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { currentUserSelector, isAuthenticatedSelector, queryTableSelector } from "redux/selectors";
 import UserDropdown from "components/UserDropdown";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { getAccessToken } from "utils";
 
 function MainNavbar() {
   const [showPopover, setShowPopover] = useState([]);
@@ -59,6 +60,10 @@ function MainNavbar() {
     }
   }, [showMobileNavbar]);
 
+  const handleNavigatePost = () => {
+    const access_token = getAccessToken()
+    window.open(`${process.env.REACT_APP_ADMIN_URL}?token=${encodeURIComponent(access_token)}&origin=${window.location.origin}`, {target: "_blank"})
+  }
 
   return (
     <>
@@ -123,7 +128,7 @@ function MainNavbar() {
                   showPopover.includes("1") ? "absolute" : "hidden"
                 } left-0 top-9`}
               >
-                <div className="grid grid-cols-2 bg-[white] min-w-[150px] rounded-xl shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] p-2 font-bold">
+                <div className="grid grid-cols-2 bg-[white] w-80 rounded-xl shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] p-2 font-bold">
                   <Link to="/buy-car" className={`p-1 col-span-2 ${car_brand ? 'mb-2' : ''}`}>
                     All cars
                   </Link>
@@ -148,14 +153,15 @@ function MainNavbar() {
             </Link>
           </div>
 
-          <Link
+          <button
             className="hidden lg:flex font-bold text-[#FFF] text-bold 
             bg-primary-color 
             shadow-xl rounded-3xl py-3 px-6 items-center justify-center"
+            onClick={() => handleNavigatePost()}
           >
             <BorderColorIcon className="mr-2" />
             New Post
-          </Link>
+          </button>
 
           <button
             className="block lg:hidden"

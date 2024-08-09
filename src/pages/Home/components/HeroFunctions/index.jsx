@@ -81,7 +81,7 @@ function HeroFunctions() {
                             alt="car's brand logo"
                           />
                         </div>
-                        <p className="text-center mt-2 group-hover:font-bold">
+                        <p className="text-center mt-2 font-bold group-hover:text-primary-color">
                           {capitalization(car_brand.options[brandParam].value)}
                         </p>
                       </Link>
@@ -113,7 +113,7 @@ function HeroFunctions() {
                             alt=""
                           />
                         </div>
-                        <p className="text-center mt-2 group-hover:font-bold">
+                        <p className="text-center mt-2 font-bold group-hover:text-primary-color">
                           {body_type.options[bodyTypeParam].value}
                         </p>
                       </div>
@@ -138,7 +138,7 @@ function HeroFunctions() {
                 to={"/buy-car"}
                 className="w-full bg-primary-color p-2 rounded-2xl flex justify-center items-center"
               >
-                <p className="font-bold text-center text-secondary-color">
+                <p className="font-bold text-center text-[#fff]">
                   <strong>All Cars</strong>
                 </p>
               </Link>

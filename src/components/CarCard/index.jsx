@@ -58,13 +58,13 @@ function CarCard({ postData }) {
                     </div>
 
                     <div className="mt-2 text-2xl text-right text-primary-color">
-                        <strong>
+                        <span className='font-bold'>
                             {billionPart ? billionPart : ''}
-                            {billionPart ? <span className='px-1 text-xl font-normal'>billion</span> : ''}
+                            {billionPart ? <span className='px-1 text-xl font-semibold'>billion</span> : ''}
                             {millionPart}
-                            <span className='px-1 text-xl font-normal'>million</span>
-                        </strong>
-                        <span className='text-lg'>(VND)</span>
+                            <span className='px-1 text-xl font-semibold'>million</span>
+                        </span>
+                        <span className='text-lg font-semibold'>(VND)</span>
                     </div>
                 </div>
             </div>

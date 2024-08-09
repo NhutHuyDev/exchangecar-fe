@@ -4,7 +4,6 @@ import Reviews from "components/Reviews";
 
 function index() {
   return (
-    <>
       <MainLayout>
         <img
           className="block w-max mt-16"
@@ -12,8 +11,8 @@ function index() {
           src={"/img/about-us.png"}
           alt={"hero-image-" + index + 1}
         />
-        <div className="my-14 px-10 lg:px-40 2xl:px-80 text-secondary-color">
-          <h2 className="font-semibold text-center text-2xl md:text-3xl text-primary-color px-2 md:px-3 ">
+        <div className="my-14 px-10 lg:px-40 2xl:px-80 text-secondary-color font-semibold leading-7">
+          <h2 className="font-bold text-center text-2xl md:text-3xl text-primary-color px-2 md:px-3 ">
             About Us
           </h2>
           <div className="section-title-underline bg-primary-color"></div>
@@ -56,7 +55,6 @@ function index() {
         <Reviews />
         <Contact />
       </MainLayout>
-    </>
   );
 }
 

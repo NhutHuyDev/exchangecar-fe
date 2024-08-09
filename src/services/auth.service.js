@@ -1,5 +1,5 @@
 import fetchAPI from "utils/fetchAPI"
-import { GET_PROFILE, LOGIN, REQUEST_OTP, SIGNUP } from "./endpoint"
+import { GET_PROFILE, LOGIN, REQUEST_OTP, REQUEST_OTP_RESET_PASSWORD, RESET_PASSWORD, SIGNUP } from "./endpoint"
 
 
 export const authService = {
@@ -14,5 +14,11 @@ export const authService = {
     },
     signUp: (data) => {
         return fetchAPI(SIGNUP, "post", {data: data})
+    },
+    requestOtpResetPassword: ({mobile_phone}) => {
+        return fetchAPI(REQUEST_OTP_RESET_PASSWORD, "post", {data: {mobile_phone: "+84" + mobile_phone}})
+    },
+    resetPassWord: (data) => {
+        return fetchAPI(RESET_PASSWORD, "post", {data: data})
     }
 }

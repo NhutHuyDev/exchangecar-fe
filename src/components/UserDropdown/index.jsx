@@ -4,9 +4,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeAccessToken } from 'utils';
 import authSlice from 'redux/reducers/authSlice';
+import { currentUserSelector } from 'redux/selectors';
 
 const useDropDownList = [
     {
@@ -34,6 +35,7 @@ const useDropDownList = [
 const UserDropdown = () => {
     const dispatch = useDispatch()
     const [isShow, setIsShow] = useState(false)
+    const currentUser = useSelector(currentUserSelector)
 
     const handleLogout = () => {
         removeAccessToken()
@@ -41,12 +43,14 @@ const UserDropdown = () => {
     }
 
     return (
+
+        currentUser &&
         <div>
             <div className='flex gap-4 justify-center items-center text-white relative'>
                 <button className='flex gap-2 justify-center items-center py-4 bg-grey-color rounded-md px-3 relative' onClick={() => setIsShow(!isShow)}>
                     <AccountBoxIcon width={30} height={40} />
                     <span>
-                        To Hoang Minh Quan
+                        {currentUser.first_name} {currentUser.last_name}
                     </span>
                     <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />

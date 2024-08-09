@@ -30,7 +30,6 @@ export const schemaChangePassword = yup.object({
     .max(10)
     .required('Phone number is required.')
     .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits.'),
-  current_password: yup.string().required('Password field is required.').min(6, 'Password minimum 6 characters'),
   new_password: yup.string().required('New password field is required.').min(6, 'New password minimum 6 characters'),
   confirmed_password: yup
     .string()

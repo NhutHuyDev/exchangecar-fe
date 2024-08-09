@@ -98,18 +98,18 @@ function LoginForm() {
         </Link>
       </p>
 
-      {/* <div className="flex justify-center items-center w-full">
+      <div className="flex justify-center items-center w-full">
         <span className="block w-full border-[1px] border-grey-color"></span>
         <span className="block mx-2 text-grey-color-200">Or</span>
         <span className="block w-full border-[1px] border-grey-color"></span>
-      </div> */}
+      </div>
 
-      {/* <p>
+      <p>
         Did you forgot password?{" "}
         <Link to="/auth/forgot-password" className="font-bold">
           Reset password
         </Link>
-      </p> */}
+      </p>
     </div>
   );
 }

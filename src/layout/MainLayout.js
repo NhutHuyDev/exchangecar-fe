@@ -12,17 +12,12 @@ function MainLayout({ children }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //     const access_token = getAccessToken()
-  //     // if(!isAuthenticated && !access_token){
-  //     //   navigate("/auth/sign-in")
-  //     //   return
-  //     // }
-
-  //     if(access_token && !isAuthenticated){
-  //       dispatch(getProfile({access_token: access_token}))
-  //     }
-  // }, [isAuthenticated, navigate, dispatch])
+  useEffect(() => {
+      const access_token = getAccessToken()
+      if(access_token){
+        dispatch(getProfile({access_token: access_token}))
+      }
+  }, [isAuthenticated, navigate, dispatch])
 
   return (
     <>

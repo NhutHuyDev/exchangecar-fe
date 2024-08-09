@@ -1,5 +1,5 @@
 .CitiCar-DetailImagesInfor .swiper-slide-thumb-active .thumb-image {
-  @apply border-primary-color-500 border-[3px] rounded-2xl;
+  @apply border-primary-color border-[3px] rounded-2xl;
 }
 
 .CitiCar-DetailImagesInfor .swiper-button-prev,

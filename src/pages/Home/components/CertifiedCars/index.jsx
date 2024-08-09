@@ -17,8 +17,6 @@ function CertifiedCars() {
     const statusCars = useSelector(statusCarsSelector)
     const latestPosts = useSelector(latestPostsSelector)
 
-    console.log(latestPosts)
-
     useEffect(() => {
         dispatch(getLatestPosts())
     }, [])
