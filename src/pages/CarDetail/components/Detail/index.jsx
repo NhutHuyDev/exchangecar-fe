@@ -22,7 +22,6 @@ function Detail({ image, currentPost }) {
   }, [activeThumb]);
 
   return (
-    <>
       <div className="CitiCar-DetailImagesInfor px-3 py-8 xl:px-20">
         <div className="grid grid-cols-8 gap-6">
           <div className="col-span-8 xl:col-span-5">
@@ -97,7 +96,7 @@ function Detail({ image, currentPost }) {
           <div className="col-span-8 xl:col-span-3">
             <div className="rounded-2xl shadow-2xl bg-grey-color h-full p-6">
               <div>
-                <div className="flex space-x-2 items-center bg-primary-color text-[#fff] w-fit p-1 rounded-2xl text-xs">
+                <div className="flex space-x-2 items-center bg-primary-color text-[#fff] w-fit p-2 rounded-2xl text-xs">
                   <FontAwesomeIcon icon={faCertificate}/>
                   <span className="font-bold text-[#FFF]">ExchangeCar</span>
                 </div>
@@ -216,7 +215,6 @@ function Detail({ image, currentPost }) {
           </div>
         </div>
       </div>
-    </>
   );
 }
 

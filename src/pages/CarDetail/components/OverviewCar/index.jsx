@@ -98,7 +98,7 @@ function OverviewCar({ currentCar }) {
                     </button>
                     <div className="hidden md:grid grid-cols-2 md:gap-x-14 xl:gap-x-20 gap-y-5 md:px-0 xl:px-32 pt-8">
                       {features.map((feature) => (
-                        <div className="text-grey-color text-lg font-semibold flex justify-between border-b-grey-color-200 border-b border-opacity-20 pb-2">
+                        <div className="text-grey-color text-lg font-semibold flex justify-between border-b-[#fff] border-b-2 border-opacity-20 pb-2">
                           <span>{feature.name}</span>
                           <span title={currentCar[feature.attr]}>
                             {currentCar[feature.attr] === ""

@@ -58,6 +58,29 @@ h1 {
     1px 30px 60px rgba(16, 16, 16, 0.4);
 }
 
+.tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 10px;
+  height: 5px;
+  background-color: #9a4000;
+  opacity: 50%;
+}
+
+.tag::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  width: 5px;
+  height: 10px;
+  background-color: #9a4000;
+  opacity: 50%;
+  z-index: -1;
+}
+
 .section-title-underline {
   @apply w-[100px] h-[3px] rounded-full block mx-auto my-3;
 }

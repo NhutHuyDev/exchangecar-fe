@@ -53,9 +53,9 @@ function CarSwiper({ statusCars, posts }) {
           <>
             {posts.map((post, index) => (
               <SwiperSlide className="py-3" key={"car-swipper-" + index}>
-                <Link to={`/${post.car.car_slug}`}>
                   <CarCard postData={post} />
-                </Link>
+                {/* <Link to={`/${post.car.car_slug}`}>
+                </Link> */}
               </SwiperSlide>
             ))}
           </>

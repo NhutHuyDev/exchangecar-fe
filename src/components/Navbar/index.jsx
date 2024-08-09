@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import Collapse from "common/Collapse";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHover } from "react-aria";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,6 +21,7 @@ function MainNavbar() {
   const { car_brand } = useSelector(queryTableSelector);
   const currentUser = useSelector(currentUserSelector)
   const isAuthenticated = useSelector(isAuthenticatedSelector)
+  const navigate = useNavigate()
 
   const { hoverProps, isHovered } = useHover({
     onHoverStart: (e) =>
@@ -62,7 +63,12 @@ function MainNavbar() {
 
   const handleNavigatePost = () => {
     const access_token = getAccessToken()
-    window.open(`${process.env.REACT_APP_ADMIN_URL}?token=${encodeURIComponent(access_token)}&origin=${window.location.origin}`, {target: "_blank"})
+    if(access_token) {
+      window.open(`${process.env.REACT_APP_ADMIN_URL}?token=${encodeURIComponent(access_token)}&origin=${window.location.origin}`, {target: "_blank"})
+      return
+    }
+
+    navigate("/auth/sign-in")
   }
 
   return (

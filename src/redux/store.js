@@ -4,6 +4,7 @@ import filtersSlice from "./reducers/filtersSlice";
 import authSlice from "./reducers/authSlice";
 import sellCarSlice from "./reducers/sellCarSlice";
 import formSlice from "./reducers/formSlice";
+import appSlice from "./reducers/appSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     filters: filtersSlice.reducer,
     auth: authSlice.reducer,
     sellCar: sellCarSlice.reducer,
-    form: formSlice.reducer
+    form: formSlice.reducer,
+    app: appSlice.reducer
   },
 });
 

@@ -17,17 +17,12 @@ const fetchAPI = async (apiEndpoint, method, payload) => {
 
     if (method === 'get' || !method) {
         try {
-            
-            console.log("headers",headers, apiUrl, apiEndpoint);
             callApi = await axios.get(apiUrl, {
                 headers: headers
             })
-
-            // console.log(callApi);
             
             return callApi
         } catch (error) {
-            console.log("header error",headers, apiUrl, apiEndpoint);
             showToastError({message: error.message})
             return error
         }
@@ -35,7 +30,20 @@ const fetchAPI = async (apiEndpoint, method, payload) => {
     if (method === 'post' && payload != null) {
         try {
             const data = payload.data
-            callApi = await axios.post(apiUrl, data)
+            callApi = await axios.post(apiUrl, data, {
+                headers: headers
+            })
+            return callApi
+        } catch (error) {
+            showToastError(error.message)
+            return error
+        }
+    }
+    if (method === 'delete' && payload != null) {
+        try {
+            callApi = await axios.delete(apiUrl, {
+                headers: headers
+            })
             return callApi
         } catch (error) {
             showToastError(error.message)

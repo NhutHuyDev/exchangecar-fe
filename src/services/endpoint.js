@@ -17,3 +17,6 @@ export const REQUEST_OTP_RESET_PASSWORD =  `${APP}/${AUTH_SERVICE}/request-otp/r
 // customers
 export const UPDATE_PROFILE = `${APP}/${CUSTOMER_SERVICE}/me`
 export const GET_PROFILE = `${APP}/customers/me`
+export const GET_WISHLIST = `${APP}/${CUSTOMER_SERVICE}/wishlist`
+export const ADD_WISHLIST = `${APP}/${CUSTOMER_SERVICE}/wishlist`
+export const REMOVE_WISHLIST = `${APP}/${CUSTOMER_SERVICE}/wishlist`

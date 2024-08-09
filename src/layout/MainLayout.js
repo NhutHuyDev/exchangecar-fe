@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAccessToken } from "utils";
 import { getProfile } from "redux/reducers/authSlice";
+import { selectLoading } from "redux/reducers/appSlice";
+import Loading from "common/Loading";
 
 function MainLayout({ children }) {
   const isAuthenticated = useSelector(isAuthenticatedSelector)
+  const loading = useSelector(selectLoading)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -23,6 +26,7 @@ function MainLayout({ children }) {
     <>
       <MainNavbar />
       {children}
+      {loading && <Loading />}
       <Footer />
     </>
   );
