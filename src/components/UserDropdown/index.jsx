@@ -15,14 +15,14 @@ const useDropDownList = [
         title: 'Your account',
         iconColor: '#03C9D7',
         iconBg: '#E5FAFB',
-        path: ""
+        path: process.env.REACT_APP_ADMIN_URL + "/profile"
     },
     {
         icon: <FavoriteBorderIcon className='!h-7 !w-7 !text-[rgb(0,194,146)]' />,
         title: 'Your favorites',
         iconColor: 'rgb(0, 194, 146)',
         iconBg: 'rgb(235, 250, 242)',
-        path: ""
+        path: process.env.REACT_APP_ADMIN_URL + "/wishlist"
     },
     // {
     //     icon: <LogoutIcon />,

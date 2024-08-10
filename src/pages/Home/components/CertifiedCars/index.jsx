@@ -73,7 +73,7 @@ function CertifiedCars() {
                 </div>
 
                 <div className="mt-3">
-                    <Link to='/mua-xe'>
+                    <Link to='/buy-car'>
                         <p className="font-bold text-primary-color text-center">
                             View More
                         </p>
