@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeAccessToken } from 'utils';
+import { getAccessToken, removeAccessToken } from 'utils';
 import authSlice from 'redux/reducers/authSlice';
 import { currentUserSelector } from 'redux/selectors';
 
@@ -42,6 +42,8 @@ const UserDropdown = () => {
         dispatch(authSlice.actions.logout())
     }
 
+    const queryOwner = `?token=${getAccessToken()}&origin=${window.location.pathname}`
+
     return (
 
         currentUser &&
@@ -61,7 +63,7 @@ const UserDropdown = () => {
                     <div className='absolute w-[calc(100%_+_60px)] z-10 px-2 py-4 rounded-lg right-0 top-full bg-[#FFF] shadow-lg '>
                         {
                             useDropDownList.map((item,index) => (
-                                <Link to={item.path} key={"list-profile-item-" + index} className='p-4 bg-[#FFF] flex items-center justify-start gap-3 hover:bg-[#5e5e5e33] rounded-xl'>
+                                <Link to={item.path + queryOwner} key={"list-profile-item-" + index} className='p-4 bg-[#FFF] flex items-center justify-start gap-3 hover:bg-[#5e5e5e33] rounded-xl'>
                                     <div style={{backgroundColor: item.iconBg}} className='rounded-full p-2 flex justify-center items-center'>
                                         {item.icon}
                                     </div>
