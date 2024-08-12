@@ -38,7 +38,7 @@ function AuthLayout({ children }) {
         </div>
       </div>
       <div className="flex-1 flex justify-center items-center bg-[#fff] h-full rounded-tl-3xl rounded-bl-3xl">
-        <Logo className='absolute top-[10px] !h-32 !w-32 xl:!w-40 xl:!h-40 rounded-full box-shadow-custom animate-fly-in' />
+        <Logo className='absolute top-[20px] right-[20px] !h-32 !w-32 xl:!w-40 xl:!h-40 rounded-full box-shadow-custom animate-fly-in' />
         {children}
       </div>
     </div>
