@@ -140,7 +140,7 @@ function MainNavbar() {
                   </Link>
                   {car_brand
                     ? Object.keys(car_brand.options).map((option) => (
-                        <Link to={`/buy-car/?car_brand=${option}`} className="p-1 mb-2">
+                        <Link to={`/buy-car/?car_brand=${option}`} className="p-2 mb-2 hover:bg-primary-color hover:bg-opacity-50 rounded-lg w-fit">
                           {car_brand.options[option].value}
                         </Link>
                       ))

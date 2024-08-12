@@ -138,7 +138,7 @@ function BrandModelFilterContent({ boxStyle, hasButton }) {
                         onBlur={() => handleOnBlur()}
                       >
                         <img src={car_brand.options[brandParam].logo} alt="" />
-                        <p>
+                        <p className="font-bold">
                           {capitalization(car_brand.options[brandParam].value)}
                         </p>
                       </div>
