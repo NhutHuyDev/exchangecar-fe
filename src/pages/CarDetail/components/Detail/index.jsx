@@ -143,7 +143,7 @@ function Detail({ image, currentPost }) {
                         alt=""
                       />
                       <span className="text-base text-primary-color font-semibold">
-                        {currentPost?.car?.car_mileage}
+                        {currentPost?.car?.car_mileage ?? 0}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
