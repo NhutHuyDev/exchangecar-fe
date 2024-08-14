@@ -16,6 +16,7 @@ function OtpCreateAccountForm() {
   
   const handleOtpNumberOnChange = (e) => {
     setOtpNumber(e);
+    dispatch(formSlice.actions.setFormData({...formData, verify_otp: e}))
   };
 
   const hanleNextOtp = async () => {
@@ -60,7 +61,6 @@ function OtpCreateAccountForm() {
             e.preventDefault();
             hanleNextOtp()
           }}
-          disabled={isObjectEmpty(formData) || (!isObjectEmpty(formData) && formData.verify_otp !== optNumber)}
           className="p-4 rounded-3xl w-full bg-primary-color text-[white] disabled:bg-opacity-70"
         >
           Next
