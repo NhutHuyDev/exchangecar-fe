@@ -69,10 +69,10 @@ function OtpCreateAccountForm() {
       <div className="flex flex-row justify-end items-end">
         <CountDown seconds={600} />
       </div>
-      <span className="text-end d-inline-block w-100 cursor-pointer">
+      {/* <span className="text-end d-inline-block w-100 cursor-pointer">
         Didn't receive the OTP?
         <span className="font-bold">Send Again</span>
-      </span>
+      </span> */}
     </div>
   );
 }

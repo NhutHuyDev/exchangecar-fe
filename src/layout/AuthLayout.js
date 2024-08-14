@@ -1,9 +1,11 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "common/Loading";
 import Logo from "common/Logo";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { selectLoading } from "redux/reducers/appSlice";
 import { currentUserSelector, isAuthenticatedSelector } from "redux/selectors";
 import { getAccessToken, isObjectEmpty } from "utils";
 
@@ -11,6 +13,7 @@ function AuthLayout({ children }) {
   const isAuthenticated = useSelector(isAuthenticatedSelector)
   const currentUser = useSelector(currentUserSelector)
   const navigate = useNavigate()
+  const loading = useSelector(selectLoading)
 
   // useEffect(() => {
   //   const access_token = getAccessToken()
@@ -40,6 +43,7 @@ function AuthLayout({ children }) {
       <div className="flex-1 flex justify-center items-center bg-[#fff] h-full rounded-tl-3xl rounded-bl-3xl">
         <Logo className='absolute top-[20px] right-[20px] !h-32 !w-32 xl:!w-40 xl:!h-40 rounded-full box-shadow-custom animate-fly-in' />
         {children}
+        {loading && <Loading />}
       </div>
     </div>
   );

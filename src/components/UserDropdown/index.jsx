@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken, removeAccessToken } from 'utils';
 import authSlice from 'redux/reducers/authSlice';
 import { currentUserSelector } from 'redux/selectors';
+import { useClickOutside } from 'hooks/use-click-outside';
 
 const useDropDownList = [
     {
@@ -37,6 +38,10 @@ const UserDropdown = () => {
     const [isShow, setIsShow] = useState(false)
     const currentUser = useSelector(currentUserSelector)
 
+    const nodeRef = useClickOutside(() => {
+        setIsShow(false)
+      })
+
     const handleLogout = () => {
         removeAccessToken()
         dispatch(authSlice.actions.logout())
@@ -44,12 +49,22 @@ const UserDropdown = () => {
 
     const queryOwner = `?token=${getAccessToken()}&origin=${window.location.pathname}`
 
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setIsShow(false)
+        })
+
+        return window.addEventListener("scroll", () => {
+            setIsShow(false)
+        })
+    }, [])
+
     return (
 
         currentUser &&
         <div>
             <div className='flex gap-4 justify-center items-center text-white relative'>
-                <button className='flex gap-2 justify-center items-center py-4 bg-grey-color rounded-md px-3 relative' onClick={() => setIsShow(!isShow)}>
+                <button className='flex gap-2 justify-center items-center py-4 bg-grey-color rounded-md px-3 relative' onClick={() => setIsShow(true)}>
                     <AccountBoxIcon width={30} height={40} />
                     <span>
                         {currentUser.first_name} {currentUser.last_name}
@@ -60,7 +75,7 @@ const UserDropdown = () => {
                 </button>
                 {
                     isShow && 
-                    <div className='absolute w-[calc(100%_+_60px)] z-10 px-2 py-4 rounded-lg right-0 top-full bg-[#FFF] shadow-lg '>
+                    <div ref={nodeRef} className='absolute w-[calc(100%_+_60px)] z-10 px-2 py-4 rounded-lg right-0 top-full bg-[#FFF] shadow-lg '>
                         {
                             useDropDownList.map((item,index) => (
                                 <Link to={item.path + queryOwner} key={"list-profile-item-" + index} className='p-4 bg-[#FFF] flex items-center justify-start gap-3 hover:bg-[#5e5e5e33] rounded-xl'>

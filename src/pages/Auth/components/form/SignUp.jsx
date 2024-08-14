@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setLoading } from "redux/reducers/appSlice";
 import formSlice from "redux/reducers/formSlice";
 import { authService } from "services/auth.service";
 import { showToastError } from "utils";
@@ -32,22 +33,24 @@ function SignUpForm() {
     event.preventDefault()
 
     const { mobile_phone, password, confirmed_password, first_name, last_name } = data;
+    dispatch(setLoading(true))
 
-    try {
-      const res = await authService.requestOTPSignUp({mobile_phone: mobile_phone})
+    const res = await authService.requestOTPSignUp({mobile_phone: mobile_phone})
 
+    if(res.status === 200) {
       dispatch(formSlice.actions.setFormData({
         ...data,
         mobile_phone: "+84" + mobile_phone,
         verify_otp: res.data.otp
       }))
-
+  
       navigate("/auth/otp/create-account")
-      
-    } catch (error) {
-      showToastError({message: "Some thing went wrong!"})
-      console.log(error);
     }
+    else {
+      showToastError({message: res.response.data.message})
+
+    }
+    dispatch(setLoading(false))
   }
 
   return (

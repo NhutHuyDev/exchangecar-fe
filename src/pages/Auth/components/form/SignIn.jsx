@@ -5,7 +5,8 @@ import { schemaSignIn } from "utils/schemaForm";
 import authSlice, { signIn } from "redux/reducers/authSlice";
 import { useDispatch } from "react-redux";
 import { authService } from "services/auth.service";
-import { saveAccessToken } from "utils";
+import { saveAccessToken, showToastError, showToastSuccess } from "utils";
+import { setLoading } from "redux/reducers/appSlice";
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -31,18 +32,28 @@ function LoginForm() {
   const onHandleSubmit = async (data, event) => {
     event.preventDefault()
 
+    dispatch(setLoading(true))
     const { phoneNumber, password } = data;
-
     const resTokens = await authService.signIn({mobile_phone: phoneNumber, password: password})
+    if(resTokens.status === 200) {
+      const resProfile = await authService.getProfile({access_token: resTokens.data.access_token})
+      const allResults = await Promise.all([resTokens, resProfile])
+      if(allResults[0] && allResults[1]) {
+        saveAccessToken(allResults[0].data.access_token)
+        dispatch(authSlice.actions.setCurrentUser(allResults[1].data.data.currentUser))
+        showToastSuccess({message: "Login success!"})
+        navigate("/")
+      }
+      else{
+        showToastError({message: allResults[1].data.message})
+      }
+    }
+    else {
+      showToastError({message: resTokens.response.data.message})
+    }
 
-    const resProfile = await authService.getProfile({access_token: resTokens.data.access_token})
+    dispatch(setLoading(false))
 
-    const allResults = await Promise.all([resTokens, resProfile])
-
-    saveAccessToken(allResults[0].data.access_token)
-
-    dispatch(authSlice.actions.setCurrentUser(allResults[1].data.data.currentUser))
-    navigate("/")
   }
 
   return (
