@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import CountDown from "common/CountDown";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formDataSelector } from "redux/selectors";
 import { isObjectEmpty, showToastError } from "utils";
 import { authService } from "services/auth.service";
+import formSlice from "redux/reducers/formSlice";
 
 function OtpCreateAccountForm() {
   const navigate = useNavigate();
@@ -13,9 +14,11 @@ function OtpCreateAccountForm() {
   const formData = useSelector(formDataSelector)
 
   const [optNumber, setOtpNumber] = useState("");
+  const dispatch = useDispatch()
 
   const handleOtpNumberOnChange = (e) => {
     setOtpNumber(e);
+    dispatch(formSlice.actions.setFormData({...formData, otp: e}))
   };
 
   const hanleNextOtp = async () => {
