@@ -15,7 +15,7 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import filtersSlice from "redux/reducers/filtersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { byPriceFilterSelector } from "redux/selectors";
+import { byPriceFilterSelector, queryTableSelector } from "redux/selectors";
 
 const factor = 1000000;
 const minValue = 0;
@@ -77,6 +77,8 @@ function BudgetFilterContent({ hasButton, boxStyle }) {
   const id = open ? "simple-popover" : undefined;
   // ------------------------------------------------
 
+  const queryTable = useSelector(queryTableSelector);
+
   const handleChange = (event, newValue) => {
     setSliderValue(newValue);
     setMinBudget(numberToLocaleString(newValue[0] * factor));
@@ -104,16 +106,16 @@ function BudgetFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setPriceFilter(sliderValue));
-    dispatch(filtersSlice.actions.setQueryFilter());
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setPriceFilter([]));
-    dispatch(filtersSlice.actions.setQueryFilter());
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

@@ -36,16 +36,16 @@ function EngineTypeFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setEngineTypeFilter(filterEngineType));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setEngineTypeFilter(null));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

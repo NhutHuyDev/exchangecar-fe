@@ -36,16 +36,16 @@ function OutColorFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setOutColorFilter(filterOutColor));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setOutColorFilter(null));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

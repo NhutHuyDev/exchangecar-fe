@@ -132,10 +132,13 @@ export default createSlice({
     setQueryFilter: (state, action) => {
       const queryTable = action.payload;
 
+      console.log(queryTable)
+
       const queryArr = [];
       const valueArr = [];
       //Brand Filter
       if (state.byBrand) {
+        console.log("state.byBrand: ", state.byBrand)
         queryArr.push("car_brand=" + state.byBrand);
         valueArr.push(
           "car_brand=" + queryTable.car_brand.options[state.byBrand].value
@@ -171,6 +174,7 @@ export default createSlice({
 
       //Price Filter
       if (state.byPrice.length) {
+        console.log("state.byPrice")
         queryArr.push("selling_price=" + state.byPrice.join(","));
         valueArr.push("selling_price=" + state.byPrice.join(","));
       }
@@ -257,7 +261,7 @@ export default createSlice({
       }
 
       //byPage Filter
-      if (state.byPage > 1) {
+      if (state.byPage >= 1) {
         queryArr.push("page=" + state.byPage);
         valueArr.push("page=" + state.byPage);
       }

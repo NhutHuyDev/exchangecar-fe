@@ -36,16 +36,16 @@ function OriginFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setOriginFilter(filterOrigin));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setOriginFilter(null));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

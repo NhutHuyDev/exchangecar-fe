@@ -78,16 +78,16 @@ function BodyTypeFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setBodyTypeFilter(filterBodyType));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setBodyTypeFilter(null));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

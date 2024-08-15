@@ -36,16 +36,16 @@ function DrivetrainFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setDrivetrainFilter(filterDrivetrain));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setDrivetrainFilter(null));
-    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };

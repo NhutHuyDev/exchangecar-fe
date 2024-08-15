@@ -15,7 +15,7 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import filtersSlice from "redux/reducers/filtersSlice";
-import { byKmFilterSelector } from "redux/selectors";
+import { byKmFilterSelector, queryTableSelector } from "redux/selectors";
 
 const factor = 1;
 const minValue = 0;
@@ -72,6 +72,8 @@ function KmFilterContent({ hasButton, boxStyle }) {
   const id = open ? "simple-popover" : undefined;
   // ------------------------------------------------
 
+  const queryTable = useSelector(queryTableSelector);
+
   const handleChange = (event, newValue) => {
     setSliderValue(newValue);
     setMinKm(numberToLocaleString(newValue[0] * factor));
@@ -80,16 +82,16 @@ function KmFilterContent({ hasButton, boxStyle }) {
 
   const handleFilterBtnOnClick = () => {
     dispatch(filtersSlice.actions.setKmFilter(sliderValue));
-    dispatch(filtersSlice.actions.setQueryFilter());
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
 
   const handleFilterClearOnClick = () => {
     dispatch(filtersSlice.actions.setKmFilter([]));
-    dispatch(filtersSlice.actions.setQueryFilter());
     dispatch(filtersSlice.actions.setPageFilter(1));
+    dispatch(filtersSlice.actions.setQueryFilter(queryTable));
 
     handleClose();
   };
