@@ -67,14 +67,16 @@ function CarList() {
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3">
             {cars.map((carPost) => (
-              <Link
-                key={carPost.car.car_slug}
-                className="mx-2 my-2"
-                to={`/${carPost.car.car_slug}`}
-                reloadDocument
-              >
-                <CarCard postData={carPost} />
-              </Link>
+              // <Link
+              //   key={carPost.car.car_slug}
+              //   className="mx-2 my-2"
+              //   to={`/${carPost.car.car_slug}`}
+              //   reloadDocument
+              // >
+              // </Link>
+              <div key={carPost.car.car_slug} className="mx-2 my-2">
+                <CarCard  postData={carPost} />
+              </div>
             ))}
           </div>
 
