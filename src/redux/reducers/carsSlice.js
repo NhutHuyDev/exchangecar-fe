@@ -35,7 +35,7 @@ const carsSlice = createSlice({
       })
       .addCase(getLatestPosts.fulfilled, (state, action) => {
         if (!action.payload.error) {
-          state.latestPosts = action.payload.latestPosts;
+          state.latestPosts = action.payload.latestPoweredPosts;
         } else {
           state.latestPosts = [];
         }
@@ -85,6 +85,48 @@ export const getCars = createAsyncThunk(
   }
 );
 
+export const getPoweredCars = createAsyncThunk(
+  "cars/getCars",
+  async (page, { getState }) => {
+    const state = getState();
+
+    const url = `/api/v1/posts/powered?${state.filters.valueFilter}`;
+
+    let res = {};
+
+    try {
+      res = await fetchAPI(url);
+
+      const { data } = res.data;
+
+      return data;
+    } catch (error) {
+      return { error: true };
+    }
+  }
+);
+
+export const getPremiumOrHigherCars = createAsyncThunk(
+  "cars/getCars",
+  async (page, { getState }) => {
+    const state = getState();
+
+    const url = `/api/v1/posts/premium-and-higher?${state.filters.valueFilter}`;
+
+    let res = {};
+
+    try {
+      res = await fetchAPI(url);
+
+      const { data } = res.data;
+
+      return data;
+    } catch (error) {
+      return { error: true };
+    }
+  }
+);
+
 export const getCar = createAsyncThunk("/car/getCar", async (slug) => {
   const res = await fetchAPI("/api/v1/posts/" + slug);
 
@@ -96,7 +138,7 @@ export const getCar = createAsyncThunk("/car/getCar", async (slug) => {
 export const getLatestPosts = createAsyncThunk(
   "/cars/getLatestPosts",
   async () => {
-    const res = await fetchAPI("/api/v1/posts/latest", "get", { headers: {
+    const res = await fetchAPI("/api/v1/posts/powered/latest", "get", { headers: {
       'Content-Type': 'application/json',
     }});
 

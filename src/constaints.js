@@ -1,3 +1,3 @@
 export default {
-  host: "https://exchangecar-be.nguyennhuthuy.com",
+  host: "http://localhost:5000",
 };

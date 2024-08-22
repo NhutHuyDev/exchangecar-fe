@@ -10,18 +10,22 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { currentUserSelector, isAuthenticatedSelector, queryTableSelector } from "redux/selectors";
+import {
+  currentUserSelector,
+  isAuthenticatedSelector,
+  queryTableSelector,
+} from "redux/selectors";
 import UserDropdown from "components/UserDropdown";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { getAccessToken } from "utils";
 
 function MainNavbar() {
   const [showPopover, setShowPopover] = useState([]);
   const [showMobileNavbar, setShowMobileNavbar] = useState(false);
   const { car_brand } = useSelector(queryTableSelector);
-  const currentUser = useSelector(currentUserSelector)
-  const isAuthenticated = useSelector(isAuthenticatedSelector)
-  const navigate = useNavigate()
+  const currentUser = useSelector(currentUserSelector);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const navigate = useNavigate();
 
   const { hoverProps, isHovered } = useHover({
     onHoverStart: (e) =>
@@ -62,14 +66,19 @@ function MainNavbar() {
   }, [showMobileNavbar]);
 
   const handleNavigatePost = () => {
-    const access_token = getAccessToken()
-    if(access_token) {
-      window.open(`${process.env.REACT_APP_ADMIN_URL}?token=${encodeURIComponent(access_token)}&origin=${window.location.origin}`, {target: "_blank"})
-      return
+    const access_token = getAccessToken();
+    if (access_token) {
+      window.open(
+        `${process.env.REACT_APP_ADMIN_URL}?token=${encodeURIComponent(
+          access_token
+        )}&origin=${window.location.origin}`,
+        { target: "_blank" }
+      );
+      return;
     }
 
-    navigate("/auth/sign-in")
-  }
+    navigate("/auth/sign-in");
+  };
 
   return (
     <>
@@ -92,15 +101,19 @@ function MainNavbar() {
           </div>
           <div className="flex items-center gap-5 md:gap-7">
             <Link to="tel:+6494461709">
-              <FontAwesomeIcon icon={faPhone} className="me-1 font-bold text-lg" />
+              <FontAwesomeIcon
+                icon={faPhone}
+                className="me-1 font-bold text-lg"
+              />
               098 6578 655
             </Link>
-            {
-              isAuthenticated ? <UserDropdown /> : 
-                <Link to="/auth/sign-in" className="p-2 font-bold text-lg">
-                  Sign In / Sign Up
-                </Link>
-            }
+            {isAuthenticated ? (
+              <UserDropdown />
+            ) : (
+              <Link to="/auth/sign-in" className="p-2 font-bold text-lg">
+                Sign In / Sign Up
+              </Link>
+            )}
           </div>
         </div>
 
@@ -119,12 +132,30 @@ function MainNavbar() {
           </div>
 
           <div className="hidden lg:flex gap-5 md:gap-8 font-bold">
+            <Link
+              to="/powered-by-exchangecar"
+              className="p-2 text-lg font-bold text-primary-color relative"
+            >
+              Powered by ExchangeCar
+              <span class="flex h-3 w-3 absolute top-1 right-[-2px]">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-color opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-color"></span>
+              </span>
+            </Link>
+            <Link
+              to="/highlight"
+              className="p-2 text-lg font-bold text-primary-color"
+            >
+              Highlight
+            </Link>
             <div
               className="p-2 flex items-center relative"
               {...hoverProps}
               data-hover-index={1}
             >
-              <span className="mr-1 text-secondary-color text-lg font-bold cursor-pointer">Buy</span>
+              <span className="mr-1 text-secondary-color text-lg font-bold cursor-pointer">
+                Buy
+              </span>
               <FontAwesomeIcon
                 icon={faCaretDown}
                 className="text-secondary-color"
@@ -135,12 +166,18 @@ function MainNavbar() {
                 } left-0 top-9`}
               >
                 <div className="grid grid-cols-2 bg-[white] w-80 rounded-xl shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] p-2 font-bold">
-                  <Link to="/buy-car" className={`p-1 col-span-2 ${car_brand ? 'mb-2' : ''}`}>
+                  <Link
+                    to="/buy-car"
+                    className={`p-1 col-span-2 ${car_brand ? "mb-2" : ""}`}
+                  >
                     All cars
                   </Link>
                   {car_brand
                     ? Object.keys(car_brand.options).map((option) => (
-                        <Link to={`/buy-car/?car_brand=${option}`} className="p-2 mb-2 hover:bg-primary-color hover:bg-opacity-50 rounded-lg w-fit">
+                        <Link
+                          to={`/buy-car/?car_brand=${option}`}
+                          className="p-2 mb-2 hover:bg-primary-color hover:bg-opacity-50 rounded-lg w-fit"
+                        >
                           {car_brand.options[option].value}
                         </Link>
                       ))
@@ -211,7 +248,11 @@ function MainNavbar() {
               </p>
             </Link>
           </div>
+
           <div className="flex flex-col space-y-2 pb-3 border-b-2 border-grey-color font-bold">
+            <Link to="/about-us" className="p-2 text-lg font-bold">
+              Highlight
+            </Link>
             <Collapse
               title={"Buy Car"}
               className={"text-secondary-color text-left p-2 pl-0 "}
