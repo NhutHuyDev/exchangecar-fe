@@ -102,7 +102,7 @@ function CarCard({ postData }) {
           className="flex flex-col flex-auto justify-between py-4 px-6 bg-[white] rounded-b-2xl"
         >
           <div className="py-3 grid grid-cols-2">
-            {(postData.package_option === "Vip" ||
+            {(postData.package_option === "VIP" ||
               postData.package_option === "Premium") && (
               <div className="flex space-x-2">
                 <div className="flex space-x-2 items-center bg-primary-color text-grey-color w-fit py-1 px-2 rounded-2xl text-xs">
@@ -208,7 +208,7 @@ function CarCard({ postData }) {
           )}
         </div>
       </div>
-      {postData.package_option === "Vip" && (
+      {postData.package_option === "VIP" && (
         <WaterMask url={postData.car.car_slug} />
       )}
     </div>
