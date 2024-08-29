@@ -198,7 +198,7 @@ function Detail({ image, currentPost }) {
                       className="col-span-1 w-12 mx-auto"
                     />
                     <div className="col-span-2 text-secondary-color">
-                        <p className="font-bold">{currentPost?.customer?.first_name + currentPost?.customer?.last_name}</p>
+                        <p className="font-bold">{currentPost?.staff?.first_name + ' ' + currentPost?.staff?.last_name}</p>
                         <span>District 7, Ho Chi Minh City</span>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ function Detail({ image, currentPost }) {
                   className="text-center block py-3 rounded-full w-full bg-primary-color text-grey-color text-lg font-bold"
                 >
                   <FontAwesomeIcon icon={faPhone} className="me-2" />
-                  {formatPhoneNumber(currentPost?.customer?.mobile_phone)}
+                  {formatPhoneNumber(currentPost?.staff?.mobile_phone)}
                 </a>
               </div>
             </div>

@@ -26,7 +26,7 @@ function CertifiedCars() {
         <div className="bg-grey-color py-12">
             <div className="px-3 lg:px-0 w-full lg:w-4/5 m-auto">
                 <h2 className="font-bold text-center text-secondary-color text-2xl md:text-3xl px-2 md:px-3 ">
-                    New cars at <span className="text-3xl text-primary-color font-bold">ExchangeCar</span>
+                    Powered by <span className="text-3xl text-primary-color font-bold">ExchangeCar</span>
                 </h2>
                 <div className="section-title-underline bg-secondary-color"></div>
 
@@ -73,7 +73,7 @@ function CertifiedCars() {
                 </div>
 
                 <div className="mt-3">
-                    <Link to='/buy-car'>
+                    <Link to='/powered-by-exchangecar'>
                         <p className="font-bold text-primary-color text-center">
                             View More
                         </p>

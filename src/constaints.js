@@ -1,3 +1,5 @@
-export default {
+const constraint = {
   host: "https://exchangecar-be.nguyennhuthuy.com",
 };
+
+export default constraint;
